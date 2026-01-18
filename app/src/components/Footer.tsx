@@ -32,11 +32,19 @@ const FooterLink = styled(Link)`
   }
 `;
 
+const LinkContainer = styled.div`
+  display: flex;
+  gap: ${theme.spacing.l};
+`;
+
 export function Footer() {
   return (
     <FooterContainer>
       <FooterContent>
-        <FooterLink to="/impressum">Impressum </FooterLink>
+        <LinkContainer>
+          <FooterLink to="/impressum">Impressum</FooterLink>
+          <FooterLink to="/todo">Was noch kommt</FooterLink>
+        </LinkContainer>
       </FooterContent>
     </FooterContainer>
   );

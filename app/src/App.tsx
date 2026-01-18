@@ -208,7 +208,7 @@ function App() {
             Die Auslastungsdaten werden regelmäßig von der Webseite der Stadtwerke München (SWM) übernommen und als historische Kurven dargestellt.
           </p>
           <p>
-            Aktuelle Live-Daten findest du direkt auf der <a href="https://www.swm.de/baeder/auslastung" target="_blank" rel="noopener noreferrer">Seite der SWM</a>.
+            Dies ist ein <b>privates Projekt</b>, nicht von den Stadtwerken München. Aktuelle Live-Daten findest du direkt auf der <a href="https://www.swm.de/baeder/auslastung" target="_blank" rel="noopener noreferrer">Seite der SWM</a>.
           </p>
         </IntroText>
       </ContentContainer>

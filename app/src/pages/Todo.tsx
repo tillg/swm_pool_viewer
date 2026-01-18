@@ -1,7 +1,9 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import ReactMarkdown from 'react-markdown';
 import { theme } from '../styles/theme';
+import todoContent from '../content/todo.md';
 
 const POOL_IMAGES = [
   '/pool-1.jpg',
@@ -74,33 +76,39 @@ const Title = styled.h1`
   margin: 0 0 ${theme.spacing.xl} 0;
 `;
 
-const Section = styled.section`
-  margin-bottom: ${theme.spacing.xl};
-  padding-bottom: ${theme.spacing.l};
-  border-bottom: 1px solid ${theme.colors.border};
+const MarkdownContent = styled.div`
+  h2 {
+    color: #0065CC;
+    font-family: ${theme.typography.fontFamily.bold};
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.4;
+    margin: ${theme.spacing.xl} 0 ${theme.spacing.m} 0;
+    padding-bottom: ${theme.spacing.s};
+    border-bottom: 1px solid ${theme.colors.border};
 
-  &:last-child {
-    border-bottom: none;
+    &:first-child {
+      margin-top: 0;
+    }
   }
-`;
 
-const SectionTitle = styled.h2`
-  color: #0065CC;
-  font-family: ${theme.typography.fontFamily.bold};
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 1.4;
-  margin: 0 0 ${theme.spacing.m} 0;
-`;
+  ul {
+    margin: 0 0 ${theme.spacing.m} 0;
+    padding-left: ${theme.spacing.l};
+  }
 
-const Paragraph = styled.p`
-  color: rgb(32, 32, 32);
-  font-size: 16px;
-  line-height: 1.5;
-  margin: 0 0 ${theme.spacing.m} 0;
+  li {
+    color: rgb(32, 32, 32);
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: ${theme.spacing.s};
+  }
 
-  &:last-child {
-    margin-bottom: 0;
+  p {
+    color: rgb(32, 32, 32);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 0 ${theme.spacing.m} 0;
   }
 
   a {
@@ -114,11 +122,6 @@ const Paragraph = styled.p`
   }
 `;
 
-const Label = styled.strong`
-  font-family: ${theme.typography.fontFamily.bold};
-  font-weight: 700;
-`;
-
 const Footer = styled.footer`
   background: ${theme.colors.background.page};
   padding: ${theme.spacing.xl} 0;
@@ -129,6 +132,8 @@ const FooterContent = styled.div`
   max-width: ${theme.layout.contentMaxWidth};
   margin: 0 auto;
   padding: 0 ${theme.spacing.xl};
+  display: flex;
+  gap: ${theme.spacing.l};
 `;
 
 const FooterLink = styled(Link)`
@@ -147,7 +152,7 @@ const FooterLink = styled(Link)`
   }
 `;
 
-export function Impressum() {
+export function Todo() {
   const randomImage = useMemo(() => {
     const index = Math.floor(Math.random() * POOL_IMAGES.length);
     return POOL_IMAGES[index];
@@ -162,50 +167,17 @@ export function Impressum() {
       <ContentContainer>
         <BackLink to="/">Zurück zur Startseite</BackLink>
 
-        <Title>Impressum</Title>
+        <Title>Was noch kommt</Title>
 
-        <Section>
-          <SectionTitle>Angaben gemäß § 5 TMG</SectionTitle>
-          <Paragraph>
-            Till Gartner
-          </Paragraph>
-        </Section>
-
-        <Section>
-          <SectionTitle>Kontakt</SectionTitle>
-          <Paragraph>
-            <Label>E-Mail:</Label> till.gartner@gmail.com
-          </Paragraph>
-        </Section>
-
-        <Section>
-          <SectionTitle>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</SectionTitle>
-          <Paragraph>
-            Till Gartner
-          </Paragraph>
-        </Section>
-
-        <Section>
-          <SectionTitle>Haftungsausschluss</SectionTitle>
-
-          <Paragraph>
-            <Label>Haftung für Inhalte</Label><br />
-            Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit
-            und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.
-          </Paragraph>
-
-          <Paragraph>
-            <Label>Haftung für Links</Label><br />
-            Unsere Webseite enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben.
-            Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten
-            Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
-          </Paragraph>
-        </Section>
+        <MarkdownContent>
+          <ReactMarkdown>{todoContent}</ReactMarkdown>
+        </MarkdownContent>
       </ContentContainer>
 
       <Footer>
         <FooterContent>
           <FooterLink to="/">Startseite</FooterLink>
+          <FooterLink to="/impressum">Impressum</FooterLink>
         </FooterContent>
       </Footer>
     </PageWrapper>
