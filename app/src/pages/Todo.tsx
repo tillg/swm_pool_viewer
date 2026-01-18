@@ -11,11 +11,6 @@ const POOL_IMAGES = [
   '/pool-3.jpg',
   '/pool-4.jpg',
   '/pool-5.jpg',
-  '/pool-6.jpg',
-  '/pool-7.jpg',
-  '/pool-8.jpg',
-  '/pool-9.jpg',
-  '/pool-10.jpg',
 ];
 
 const PageWrapper = styled.div`
