@@ -4,7 +4,7 @@ View time series occupancy data for Munich's SWM pools and saunas.
 
 ## Requirements
 
-* React app with styled-components and Parcel bundler
+* React app with styled-components and Webpack bundler
 * Data source: [occupancy_features.csv](https://raw.githubusercontent.com/tillg/swm_pool_data/refs/heads/main/datasets/occupancy_features.csv)
 * Time range toggle: "Last week" / "Last 2 days"
 * Line chart showing occupancy % over time, one line per facility
@@ -21,7 +21,7 @@ View time series occupancy data for Munich's SWM pools and saunas.
 * React 18 + TypeScript
 * styled-components for styling
 * D3.js for charting (direct usage, no wrapper)
-* Parcel bundler
+* Webpack bundler
 * papaparse for CSV parsing
 
 ### Data Flow

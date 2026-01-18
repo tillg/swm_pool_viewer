@@ -33,7 +33,7 @@ cd app
 npm start
 ```
 
-The app will start on [http://localhost:1234](http://localhost:1234).
+The app will start on [http://localhost:3000](http://localhost:3000).
 
 ### Building for Production
 
@@ -50,4 +50,4 @@ Build output will be in the `app/dist` directory.
 - TypeScript
 - styled-components
 - D3.js for charting
-- Parcel bundler
+- Webpack bundler
