@@ -1,0 +1,377 @@
+# Design System
+
+Aligned with the official SWM Bäder Auslastung page: https://www.swm.de/baeder/auslastung
+
+---
+
+## Color Palette
+
+### Occupancy Level Colors (Traffic Light System)
+
+| Level | Name | Hex | RGB | Usage |
+|-------|------|-----|-----|-------|
+| Low | Green | `#3E8326` | `rgb(62, 131, 38)` | 0-50% occupancy |
+| Medium | Yellow | `#FFE306` | `rgb(255, 227, 6)` | 50-70% occupancy |
+| Busy | Orange | `#FD7700` | `rgb(253, 119, 0)` | 70-85% occupancy |
+| High | Red | `#F44336` | `rgb(244, 67, 54)` | 85-100% occupancy |
+
+### Brand Colors
+
+| Name | Hex | RGB | Usage |
+|------|-----|-----|-------|
+| SWM Blue (Primary) | `#002D5B` | `rgb(0, 45, 91)` | Headers, primary buttons, brand elements |
+| SWM Blue Light | `#0065CC` | `rgb(0, 101, 204)` | Links, interactive elements |
+| Cyan Accent | `#0B9AC5` | `rgb(11, 154, 197)` | Secondary accents |
+
+### Neutral Colors
+
+| Name | Hex | RGB | Usage |
+|------|-----|-----|-------|
+| Text Primary | `#202020` | `rgb(32, 32, 32)` | Body text, headings |
+| Text Secondary | `#4A5056` | `rgb(74, 80, 86)` | Secondary text |
+| Text Muted | `#595959` | `rgb(89, 89, 89)` | Captions, labels |
+| Border | `#CFCFCF` | `rgb(207, 207, 207)` | Borders, dividers |
+| Background Light | `#F5F5F5` | `rgb(245, 245, 245)` | Progress bar empty state |
+| Background Card | `#EFF7FE` | `rgb(239, 247, 254)` | Card backgrounds |
+| Background Page | `#FFFFFF` | `rgb(255, 255, 255)` | Page background |
+
+### Alert Colors
+
+| Name | Hex | RGB | Usage |
+|------|-----|-----|-------|
+| Alert Background | `#FDDDDD` | `rgb(253, 221, 221)` | Warning banners |
+| Alert Text | `#AC1116` | `rgb(172, 17, 22)` | Warning text |
+
+---
+
+## Typography
+
+### Font Families
+
+```css
+--font-primary: 'RobotoRegular', Arial, sans-serif;
+--font-bold: 'RobotoBold', Arial, sans-serif;
+```
+
+### Font Sizes
+
+| Name | Size | Usage |
+|------|------|-------|
+| Headline XL | `45px` | Page title in hero |
+| Headline L | `30px` | Section headers |
+| Headline M | `20px` | Subsection headers |
+| Body | `16px` | Body text |
+| Body Small | `14px` | Secondary text, labels |
+| Caption | `12px` | Captions, metadata |
+
+### Line Height
+
+```css
+--line-height-base: 1.33;  /* 21.28px at 16px base */
+```
+
+---
+
+## Spacing
+
+### Base Unit
+
+```css
+--spacing-unit: 4px;
+```
+
+### Spacing Scale
+
+| Name | Value | Usage |
+|------|-------|-------|
+| XS | `4px` | Tight spacing |
+| S | `8px` | Small gaps |
+| M | `16px` | Standard spacing |
+| L | `20px` | Card padding |
+| XL | `24px` | Section spacing |
+| XXL | `32px` | Large section gaps |
+
+---
+
+## Components
+
+### Progress Bar (Occupancy Indicator)
+
+```css
+--progress-bar-height: 15px;
+--progress-bar-radius: 10px;
+--progress-bar-bg-empty: #F5F5F5;
+--progress-bar-container-width: 590px;
+```
+
+**Structure:**
+- Container with empty background (`#F5F5F5`)
+- Filled bar width proportional to occupancy %
+- Color determined by occupancy level thresholds
+- Description text to the right showing "XX % frei"
+
+### Card
+
+```css
+--card-border-radius: 8px;
+--card-padding: 20px;
+--card-background: #EFF7FE;
+--card-shadow: none;
+```
+
+### Buttons
+
+```css
+--button-border-radius: 5px;
+--button-padding: 8px 16px;
+--button-primary-bg: #0065CC;
+--button-primary-text: #FFFFFF;
+```
+
+---
+
+## Border Radius Scale
+
+| Name | Value | Usage |
+|------|-------|-------|
+| Small | `3px` | Small elements |
+| Medium | `5px` | Buttons |
+| Large | `8px` | Cards |
+| XL | `10px` | Progress bars |
+| Round | `50%` | Circular elements |
+| Pill | `30px` | Pill-shaped elements |
+
+---
+
+## Facility Icons
+
+SVG icons using `<use href="#iconId">` pattern with `viewBox="0 0 64 64"`.
+
+### Pool Icon (`baeder3` - Swimmer)
+
+Used for: Hallenbäder (indoor pools)
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 64 64">
+  <symbol id="baeder3">
+    <g>
+      <path d="M57.282 55.475c.791.771.807 2.037.037 2.829-.771.79-2.037.807-2.829.036-3.818-3.72-9.928-3.642-13.648.174-.77.79-2.037.807-2.828.036-.79-.771-.807-2.037-.036-2.828 5.262-5.398 13.904-5.508 19.304-.247zM43.012 5l9.595.268 5.404.26c.793.027 1.808.233 2.869.807 1.956 1.058 3.158 3.01 3.073 5.584-.002.302-.043.703-.156 1.178-.178.753-.495 1.504-.989 2.21-.953 1.363-2.423 2.343-4.369 2.779-.102.022-.206.039-.31.049l-.156.01-5.445.174-6 .098-3.132 8.898-.066.256c-.274 1.2-.155 2.517.632 3.75.056.087.115.174.178.26l.092.135.082.14 4.463 8.206c3.537.298 6.94 1.593 10.13 3.69 1.207.793 2.276 1.642 3.201 2.495l.356.335c.387.371.673.675.857.886.904 1.044.79 2.623-.253 3.527-.998.864-2.486.799-3.405-.122l-.292-.316c-.15-.156-.368-.372-.652-.634-.734-.676-1.591-1.357-2.558-1.993-6.52-4.285-13.769-4.31-21.758 2.894l-.334.305c-9.93 9.18-19.76 9.18-28.086 3.57-1.203-.81-2.268-1.677-3.19-2.55l-.353-.34c-.385-.38-.67-.69-.851-.906-.89-1.055-.756-2.632.3-3.522 1.01-.852 2.496-.766 3.403.167l.221.249c.147.16.388.41.717.721.73.691 1.584 1.386 2.547 2.035 6.43 4.332 13.6 4.391 21.566-2.792l.332-.304c4.247-3.925 8.483-6.182 12.6-7.048l-3.283-6.036-.075-.105-.168-.256c-1.602-2.507-1.84-5.157-1.294-7.554l.076-.31c.063-.24.124-.433.168-.554l.025-.064 3.667-10.413c.327-.928 1.164-1.573 2.133-1.66l.183-.01 7.7-.127 5.143-.165.164-.048c.448-.145.735-.34.93-.576l.068-.09c.179-.257.24-.518.242-.616.023-.688-.113-.908-.453-1.092-.226-.122-.485-.186-.632-.204l-.064-.006-5.388-.259L42.94 10c-1.075 0-1.911.475-2.629 1.363-.28.347-.515.728-.702 1.108l-.124.267c-.03.07-.048.117-.054.137l-.05.135-.057.132-3.793 8.127-.132.257c-.175.333-.429.786-.755 1.325-.695 1.145-1.49 2.29-2.38 3.37-.845 1.023-1.735 1.935-2.66 2.698l-.398.318L18.211 37.9c-1.084.854-2.656.668-3.51-.417-.818-1.037-.683-2.52.28-3.395l.135-.116 11.018-8.68c.767-.592 1.532-1.357 2.274-2.256.724-.877 1.383-1.827 1.96-2.779.151-.249.288-.484.409-.7l.25-.458 3.718-7.971.01-.031c.271-.74.74-1.666 1.463-2.617l.204-.26c1.537-1.903 3.618-3.126 6.269-3.215L43.01 5zm-16.55 35.13c.791.77.808 2.037.037 2.828-5.263 5.398-13.906 5.508-19.305.246-.79-.771-.807-2.038-.036-2.828.771-.791 2.038-.808 2.829-.036 3.816 3.72 9.927 3.642 13.647-.174.771-.791 2.038-.808 2.829-.036zm27.87-19.856c4.97 0 8.998 4.028 8.998 8.998s-4.028 8.998-8.998 8.998-8.998-4.029-8.998-8.998c0-4.97 4.028-8.998 8.998-8.998zm0 5c-2.208 0-3.998 1.79-3.998 3.998s1.79 3.998 3.998 3.998 3.998-1.79 3.998-3.998c0-2.209-1.79-3.998-3.998-3.998z" class="path--0"></path>
+    </g>
+  </symbol>
+</svg>
+```
+
+### Sauna Icon (`sauna`)
+
+Used for: Saunen (saunas)
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 64 64">
+  <symbol id="sauna">
+    <g>
+      <path d="M16.13 19.46c1.52-1.68 3.52-2.47 5.75-1.54 1.01.42 1.59 1.1 2.3 2.47l.25.48.26.54.3.67.36.74.17.32.1.19.08.16 6 13.34h10.54c1 .03 2.09.3 3.1 1.03 1.45 1.05 2.3 2.79 2.37 5.12l.4 16 .01.3c.03.57-.04 1.18-.25 1.8l-.1.26c-.66 1.57-2.12 2.58-4.2 2.67h.1-.13c-.68.07-1.42.03-2.17-.2l-.28-.1c-1.83-.67-3-2.3-3.01-4.67l-.23-11.77H23.56c-.73 0-1.4-.4-1.74-1.04l-.07-.14-4.32-9.85-1.65 3.33-1.6 3.19-1.1 2.18-.22.4-.17.29a4.48 4.48 0 01-1.72 1.59 4.02 4.02 0 01-3.37.1 4.78 4.78 0 01-.47-.2l-.1-.07-.1-.04a4.18 4.18 0 01-2.04-2.05l-.08-.2a4.04 4.04 0 01.22-3.27l.08-.15 9.82-20.17c.21-.41.54-.95 1.02-1.5zm4.05 2.06c-.31-.06-.62.09-1 .48l-.12.12c-.18.2-.33.4-.44.57l-.1.17-.04.06-9.84 20.2-.06.12-.04.15.36.18.13.07-.02-.01.08.03.1.02c.04-.02.12-.1.23-.3l1-1.96 3.45-6.9.09-.2c.83-1.7 1.93-2.7 3.42-2.7 1.25 0 2.16.69 2.9 1.7.35.47.6.92.74 1.26l3.84 8.73H39.8c1.02 0 1.87.78 1.97 1.79v.15l.27 13.88c.02.61.15.77.42.87.2.08.49.1.71.08l.11-.02.26-.01c.26-.03.42-.08.5-.14.03-.02.05-.04.07-.09.05-.12.07-.3.06-.43l-.01-.08-.01-.13-.4-16.09c-.03-1.14-.31-1.72-.73-2.02-.27-.19-.6-.28-.83-.28H30.43c-.78 0-1.5-.46-1.81-1.17l-6.5-14.43-.25-.48-.25-.5-.52-1.12-.19-.4-.17-.33-.07-.15-.15-.25a5.02 5.02 0 00-.13-.22l-.08-.11-.07-.1zM62.36 49.1a1.98 1.98 0 01.15 3.95H51.48a1.98 1.98 0 01-.15-3.95H62.36zm-27.7 0a1.98 1.98 0 01.14 3.95H2.98a1.98 1.98 0 01-.15-3.95h31.82zm9.99-44.15c.74.72.8 1.88.16 2.67l-.11.13c-.15.15-.44.53-.75 1.08-1.2 2.18-1.23 4.6.71 7.32l.2.27c3.14 4.18 3.16 8.36 1.25 11.92-.47.9-.96 1.54-1.33 1.94a1.98 1.98 0 01-3-2.58l.11-.13.12-.14.15-.2c.14-.2.3-.45.46-.76 1.19-2.21 1.22-4.66-.73-7.4l-.2-.27c-3.14-4.18-3.14-8.34-1.2-11.87a9.2 9.2 0 011.36-1.93c.76-.79 2.01-.81 2.8-.05zm6.38 0c.75.72.8 1.88.17 2.67l-.12.13-.12.13-.15.2c-.14.2-.3.45-.47.75-1.2 2.18-1.23 4.6.7 7.33l.2.26c3.15 4.18 3.16 8.36 1.26 11.92-.48.9-.97 1.54-1.34 1.94a1.98 1.98 0 01-3-2.58l.12-.13c.06-.07.16-.19.26-.34l.18-.26c.1-.15.19-.31.29-.5 1.19-2.21 1.21-4.66-.74-7.4l-.2-.27c-3.14-4.18-3.14-8.34-1.2-11.87.49-.9.99-1.54 1.37-1.93.76-.79 2-.81 2.8-.05zm6.4 0c.74.72.8 1.88.15 2.67l-.16.19-.14.16c-.16.2-.35.5-.55.86-1.2 2.18-1.24 4.6.7 7.32l.2.27c3.14 4.18 3.16 8.36 1.26 11.92-.48.9-.97 1.54-1.34 1.94a1.98 1.98 0 01-3-2.58l.11-.13c.15-.16.44-.54.74-1.1 1.18-2.21 1.2-4.66-.74-7.4l-.2-.27c-3.14-4.18-3.14-8.34-1.2-11.87.48-.9.98-1.54 1.36-1.93.76-.79 2.02-.81 2.8-.05zM21.7 0a7.92 7.92 0 110 15.83A7.92 7.92 0 0121.7 0zm0 3.96a3.96 3.96 0 100 7.92 3.96 3.96 0 000-7.92z" class="path--0"></path>
+    </g>
+  </symbol>
+</svg>
+```
+
+### Ice Rink Icon (`eislauf`)
+
+Used for: Eislaufbahn (ice skating rink)
+
+Note: The SWM site uses the same swimmer-style icon structure. For ice skating, create a custom icon or use a standard ice skate symbol with the same dimensions (24x24px, viewBox 0 0 64 64).
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 64 64">
+  <symbol id="eislauf">
+    <g>
+      <!-- Ice skate icon path - custom design following SWM style -->
+      <path d="M52 48H12c-1.1 0-2 .9-2 2s.9 2 2 2h40c1.1 0 2-.9 2-2s-.9-2-2-2zm-4-8H16c-2.2 0-4 1.8-4 4h40c0-2.2-1.8-4-4-4zm-6-24c0-4.4-3.6-8-8-8h-4c-4.4 0-8 3.6-8 8v20h20V16zm-4 16H26V16c0-2.2 1.8-4 4-4h4c2.2 0 4 1.8 4 4v16z" class="path--0"></path>
+    </g>
+  </symbol>
+</svg>
+```
+
+### Icon Usage
+
+```jsx
+// Icon component pattern
+<svg width="24px" height="24px" viewBox="0 0 64 64" aria-hidden="true">
+  <use href="#baeder3" style={{ color: 'currentcolor' }} />
+</svg>
+```
+
+Icon sizes:
+- Standard: `24px × 24px`
+- Small: `20px × 20px`
+- Large: `32px × 32px`
+
+---
+
+## Central Design Variables File
+
+All design variables should be defined in a central theme file for consistency.
+
+### File: `src/styles/theme.ts`
+
+```typescript
+export const theme = {
+  colors: {
+    // Occupancy levels
+    occupancy: {
+      low: '#3E8326',
+      medium: '#FFE306',
+      busy: '#FD7700',
+      high: '#F44336',
+    },
+    // Brand
+    brand: {
+      primary: '#002D5B',
+      secondary: '#0065CC',
+      accent: '#0B9AC5',
+    },
+    // Neutral
+    text: {
+      primary: '#202020',
+      secondary: '#4A5056',
+      muted: '#595959',
+    },
+    background: {
+      page: '#FFFFFF',
+      card: '#EFF7FE',
+      light: '#F5F5F5',
+    },
+    border: '#CFCFCF',
+    // Alert
+    alert: {
+      background: '#FDDDDD',
+      text: '#AC1116',
+    },
+  },
+  typography: {
+    fontFamily: {
+      primary: "'RobotoRegular', Arial, sans-serif",
+      bold: "'RobotoBold', Arial, sans-serif",
+    },
+    fontSize: {
+      headlineXL: '45px',
+      headlineL: '30px',
+      headlineM: '20px',
+      body: '16px',
+      bodySmall: '14px',
+      caption: '12px',
+    },
+    lineHeight: {
+      base: 1.33,
+    },
+  },
+  spacing: {
+    xs: '4px',
+    s: '8px',
+    m: '16px',
+    l: '20px',
+    xl: '24px',
+    xxl: '32px',
+  },
+  borderRadius: {
+    small: '3px',
+    medium: '5px',
+    large: '8px',
+    xl: '10px',
+    round: '50%',
+    pill: '30px',
+  },
+  components: {
+    progressBar: {
+      height: '15px',
+      borderRadius: '10px',
+      backgroundEmpty: '#F5F5F5',
+      containerWidth: '590px',
+    },
+    card: {
+      borderRadius: '8px',
+      padding: '20px',
+      background: '#EFF7FE',
+    },
+  },
+} as const;
+
+export type Theme = typeof theme;
+```
+
+---
+
+## Occupancy Thresholds
+
+| Percentage | Level | Color | Label |
+|------------|-------|-------|-------|
+| 0-50% | Low | Green `#3E8326` | "XX % frei" |
+| 50-70% | Medium | Yellow `#FFE306` | "XX % frei" |
+| 70-85% | Busy | Orange `#FD7700` | "XX % frei" |
+| 85-100% | High | Red `#F44336` | "XX % frei" |
+
+---
+
+## Layout Specifications
+
+### Content Width
+
+```css
+--content-max-width: 1200px;
+--content-padding: 20px;
+```
+
+### Facility List Item
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ [Icon]  Facility Name                    ████████░░░░  XX % frei│
+│         Mehr Infos →                                            │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+- Icon: 24×24px, left-aligned
+- Name: Bold, 16px
+- "Mehr Infos" link: 14px, secondary text color
+- Progress bar: ~590px width, right-aligned
+- Percentage label: Right of progress bar
+
+### Section Structure
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ Echtzeit-Auslastung der Bäder                      (Section H2) │
+│ Öffnungszeiten im Überblick →                      (Link)       │
+├─────────────────────────────────────────────────────────────────┤
+│ [Facility Item 1]                                               │
+│ [Facility Item 2]                                               │
+│ ...                                                             │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Directory Contents
+
+This directory contains:
+
+| File | Description |
+|------|-------------|
+| `README.md` | This design system documentation |
+| `capture-design.js` | Playwright script used to capture design from SWM website |
+| `swm-auslastung-full.png` | Full page screenshot of SWM Auslastung page |
+| `swm-auslastung-clean.png` | Clean full page screenshot (after cookie dialog) |
+| `swm-auslastung-viewport.png` | Viewport screenshot |
+| `swm-design-data.json` | Extracted design data (colors, fonts, etc.) |
+| `swm-facility-icons.json` | Extracted SVG icons and facility data |
+
+---
+
+## Reference Screenshots
+
+Captured from https://www.swm.de/baeder/auslastung on 2026-01-18.
+
+Screenshots in this directory:
+- `swm-auslastung-full.png` - Full page capture
+- `swm-auslastung-clean.png` - Full page after dismissing cookie dialog
+- `swm-auslastung-viewport.png` - Above-the-fold viewport capture

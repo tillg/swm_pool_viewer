@@ -32,6 +32,9 @@ coverage/
 *.swp
 *.swo
 
+# Parcel
+.parcel-cache/
+
 # Misc
 .cache/
 *.tgz

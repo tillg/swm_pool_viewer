@@ -1,0 +1,15 @@
+{
+  "name": "swm_pool_viewer",
+  "version": "1.0.0",
+  "description": "View time series occupancy data for Munich's SWM pools and saunas.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "playwright": "^1.57.0"
+  }
+}

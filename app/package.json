@@ -1,0 +1,28 @@
+{
+  "name": "swm-pool-viewer",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.1.0",
+    "d3": "^7.8.0",
+    "papaparse": "^5.4.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/d3": "^7.4.0",
+    "@types/papaparse": "^5.3.0",
+    "typescript": "^5.0.0",
+    "parcel": "^2.10.0",
+    "process": "^0.11.10"
+  },
+  "scripts": {
+    "start": "parcel public/index.html",
+    "build": "parcel build public/index.html --dist-dir dist"
+  },
+  "browserslist": [
+    "defaults"
+  ]
+}

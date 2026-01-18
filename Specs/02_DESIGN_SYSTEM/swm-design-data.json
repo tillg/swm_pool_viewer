@@ -1,0 +1,1311 @@
+{
+  "colors": [
+    "rgb(0, 0, 0)",
+    "rgb(32, 32, 32)",
+    "rgb(74, 80, 86)",
+    "rgb(207, 207, 207)",
+    "rgb(62, 131, 38)",
+    "rgb(255, 255, 255)",
+    "rgb(102, 102, 102)",
+    "rgb(0, 101, 204)",
+    "rgb(0, 0, 238)",
+    "rgb(87, 93, 128)",
+    "rgb(0, 61, 130)",
+    "rgb(89, 89, 89)",
+    "rgb(172, 17, 22)",
+    "rgb(0, 45, 91)",
+    "rgb(77, 77, 77)",
+    "rgb(11, 154, 197)"
+  ],
+  "bgColors": [
+    "rgb(255, 255, 255)",
+    "rgb(62, 131, 38)",
+    "rgb(246, 251, 254)",
+    "rgb(239, 247, 254)",
+    "rgb(239, 239, 239)",
+    "rgb(0, 101, 204)",
+    "rgb(0, 45, 91)",
+    "rgb(253, 221, 221)",
+    "rgb(245, 245, 245)",
+    "rgb(255, 227, 6)",
+    "rgb(253, 119, 0)",
+    "rgb(244, 67, 54)",
+    "rgb(244, 227, 229)",
+    "rgb(230, 247, 255)",
+    "rgb(247, 252, 255)"
+  ],
+  "fonts": [
+    "sans-serif",
+    "RobotoRegular, Arial, sans-serif",
+    "Arial, sans-serif",
+    "Arial",
+    "\"Open Sans\"",
+    "RobotoBold, Arial, sans-serif",
+    "verdana"
+  ],
+  "fontSizes": [
+    "16px",
+    "14px",
+    "14.6667px",
+    "9.33333px",
+    "12px",
+    "45px",
+    "20px",
+    "30px",
+    "15px",
+    "0px",
+    "8px"
+  ],
+  "borderRadii": [
+    "3px",
+    "5px",
+    "50%",
+    "4px",
+    "8px",
+    "10px",
+    "8px 0px 0px 8px",
+    "30px"
+  ],
+  "bodyStyles": {
+    "fontFamily": "RobotoRegular, Arial, sans-serif",
+    "fontSize": "16px",
+    "lineHeight": "21.28px",
+    "color": "rgb(32, 32, 32)",
+    "backgroundColor": "rgba(0, 0, 0, 0)"
+  },
+  "occupancyElements": [
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "690px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar-empty",
+      "styles": {
+        "backgroundColor": "rgb(245, 245, 245)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "591.922px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar",
+      "styles": {
+        "backgroundColor": "rgb(255, 227, 6)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "378.828px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar__description",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "78.0781px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "690px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar-empty",
+      "styles": {
+        "backgroundColor": "rgb(245, 245, 245)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "591.922px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar",
+      "styles": {
+        "backgroundColor": "rgb(253, 119, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "242.688px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar__description",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "78.0781px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "690px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar-empty",
+      "styles": {
+        "backgroundColor": "rgb(245, 245, 245)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "591.922px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar",
+      "styles": {
+        "backgroundColor": "rgb(255, 227, 6)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "443.938px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar__description",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "78.0781px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "690px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar-empty",
+      "styles": {
+        "backgroundColor": "rgb(245, 245, 245)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "591.922px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar",
+      "styles": {
+        "backgroundColor": "rgb(253, 119, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "183.484px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar__description",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "78.0781px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "690px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar-empty",
+      "styles": {
+        "backgroundColor": "rgb(245, 245, 245)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "591.922px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar",
+      "styles": {
+        "backgroundColor": "rgb(255, 227, 6)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "420.25px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar__description",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "78.0781px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "690px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar-empty",
+      "styles": {
+        "backgroundColor": "rgb(245, 245, 245)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "591.922px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar",
+      "styles": {
+        "backgroundColor": "rgb(253, 119, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "260.438px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar__description",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "78.0781px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "690px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar-empty",
+      "styles": {
+        "backgroundColor": "rgb(245, 245, 245)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "591.922px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar",
+      "styles": {
+        "backgroundColor": "rgb(255, 227, 6)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "438.016px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar__description",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "78.0781px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "690px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar-empty",
+      "styles": {
+        "backgroundColor": "rgb(245, 245, 245)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "591.922px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar",
+      "styles": {
+        "backgroundColor": "rgb(255, 227, 6)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "325.547px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar__description",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "78.0781px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "690px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar-empty",
+      "styles": {
+        "backgroundColor": "rgb(245, 245, 245)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "591.922px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar",
+      "styles": {
+        "backgroundColor": "rgb(244, 67, 54)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "130.219px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar__description",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "78.0781px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "690px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar-empty",
+      "styles": {
+        "backgroundColor": "rgb(245, 245, 245)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "591.922px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar",
+      "styles": {
+        "backgroundColor": "rgb(255, 227, 6)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "378.828px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar__description",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "78.0781px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "690px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar-empty",
+      "styles": {
+        "backgroundColor": "rgb(245, 245, 245)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "591.922px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar",
+      "styles": {
+        "backgroundColor": "rgb(253, 119, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "201.25px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar__description",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "78.0781px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "690px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar-empty",
+      "styles": {
+        "backgroundColor": "rgb(245, 245, 245)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "591.922px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar",
+      "styles": {
+        "backgroundColor": "rgb(255, 227, 6)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "443.938px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar__description",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "78.0781px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "690px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar-empty",
+      "styles": {
+        "backgroundColor": "rgb(245, 245, 245)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "591.922px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar",
+      "styles": {
+        "backgroundColor": "rgb(253, 119, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "260.438px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar__description",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "78.0781px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "690px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar-empty",
+      "styles": {
+        "backgroundColor": "rgb(245, 245, 245)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "591.922px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar",
+      "styles": {
+        "backgroundColor": "rgb(255, 227, 6)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "402.5px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar__description",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "78.0781px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "690px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar-empty",
+      "styles": {
+        "backgroundColor": "rgb(245, 245, 245)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "591.922px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar",
+      "styles": {
+        "backgroundColor": "rgb(255, 227, 6)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "372.906px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar__description",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "78.0781px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "690px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar-empty",
+      "styles": {
+        "backgroundColor": "rgb(245, 245, 245)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "591.922px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar",
+      "styles": {
+        "backgroundColor": "rgb(255, 227, 6)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "432.094px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar__description",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "78.0781px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "690px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar-empty",
+      "styles": {
+        "backgroundColor": "rgb(245, 245, 245)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "591.922px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar",
+      "styles": {
+        "backgroundColor": "rgb(253, 119, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "10px",
+        "height": "15px",
+        "width": "224.922px"
+      }
+    },
+    {
+      "tag": "DIV",
+      "classes": "bath-capacity-item--progress-bar__description",
+      "styles": {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(32, 32, 32)",
+        "borderRadius": "0px",
+        "height": "26.5938px",
+        "width": "78.0781px"
+      }
+    }
+  ],
+  "cards": [
+    {
+      "tag": "LI",
+      "classes": "nav-card",
+      "text": " Meine SWM Unser Online-Service-Portal",
+      "styles": {
+        "backgroundColor": "rgb(239, 247, 254)",
+        "borderRadius": "8px",
+        "padding": "20px",
+        "boxShadow": "none",
+        "width": "185px",
+        "height": "120px"
+      }
+    },
+    {
+      "tag": "LI",
+      "classes": "nav-card",
+      "text": "Kunden werben Kunden Die SWM empfehlen und Prämie sichern",
+      "styles": {
+        "backgroundColor": "rgb(239, 247, 254)",
+        "borderRadius": "8px",
+        "padding": "20px",
+        "boxShadow": "none",
+        "width": "185px",
+        "height": "148px"
+      }
+    },
+    {
+      "tag": "LI",
+      "classes": "nav-card",
+      "text": "Netzanschluss Strom Anschluss ans Stromnetz beantragen",
+      "styles": {
+        "backgroundColor": "rgb(239, 247, 254)",
+        "borderRadius": "8px",
+        "padding": "20px",
+        "boxShadow": "none",
+        "width": "185px",
+        "height": "172px"
+      }
+    },
+    {
+      "tag": "LI",
+      "classes": "nav-card",
+      "text": "Produktberater Wärme Passende Wärmelösungen für Ihre Adresse finden",
+      "styles": {
+        "backgroundColor": "rgb(239, 247, 254)",
+        "borderRadius": "8px",
+        "padding": "20px",
+        "boxShadow": "none",
+        "width": "185px",
+        "height": "172px"
+      }
+    },
+    {
+      "tag": "LI",
+      "classes": "nav-card",
+      "text": "Wärmewende Die SWM setzen auf erneuerbare Energien",
+      "styles": {
+        "backgroundColor": "rgb(239, 247, 254)",
+        "borderRadius": "8px",
+        "padding": "20px",
+        "boxShadow": "none",
+        "width": "185px",
+        "height": "144px"
+      }
+    },
+    {
+      "tag": "LI",
+      "classes": "nav-card",
+      "text": "Wärmenetze der SWM Zur interaktiven Karte",
+      "styles": {
+        "backgroundColor": "rgb(239, 247, 254)",
+        "borderRadius": "8px",
+        "padding": "20px",
+        "boxShadow": "none",
+        "width": "185px",
+        "height": "148px"
+      }
+    },
+    {
+      "tag": "LI",
+      "classes": "nav-card",
+      "text": "Erdgasmobilität (Bio-CNG) Unsere Bio-CNG Tankstellen im Überblick",
+      "styles": {
+        "backgroundColor": "rgb(239, 247, 254)",
+        "borderRadius": "8px",
+        "padding": "20px",
+        "boxShadow": "none",
+        "width": "185px",
+        "height": "172px"
+      }
+    },
+    {
+      "tag": "LI",
+      "classes": "nav-card",
+      "text": "M/Wasserweg Freizeit-Tipp: Auf den Spuren des Münchner Trinkwassers",
+      "styles": {
+        "backgroundColor": "rgb(239, 247, 254)",
+        "borderRadius": "8px",
+        "padding": "20px",
+        "boxShadow": "none",
+        "width": "185px",
+        "height": "168px"
+      }
+    },
+    {
+      "tag": "LI",
+      "classes": "nav-card",
+      "text": "Naturschutz im Trinkwassergebiet Zum Schutz des Münchner Trinkwassers",
+      "styles": {
+        "backgroundColor": "rgb(239, 247, 254)",
+        "borderRadius": "8px",
+        "padding": "20px",
+        "boxShadow": "none",
+        "width": "185px",
+        "height": "172px"
+      }
+    },
+    {
+      "tag": "LI",
+      "classes": "nav-card",
+      "text": "Ökologischer Landbau im Trinkwassergebiet Zum Schutz des Münchner Trinkwassers",
+      "styles": {
+        "backgroundColor": "rgb(239, 247, 254)",
+        "borderRadius": "8px",
+        "padding": "20px",
+        "boxShadow": "none",
+        "width": "185px",
+        "height": "200px"
+      }
+    },
+    {
+      "tag": "LI",
+      "classes": "nav-card",
+      "text": "Netzanschluss Wasser Anschluss an das Wassernetz beantragen",
+      "styles": {
+        "backgroundColor": "rgb(239, 247, 254)",
+        "borderRadius": "8px",
+        "padding": "20px",
+        "boxShadow": "none",
+        "width": "185px",
+        "height": "172px"
+      }
+    },
+    {
+      "tag": "LI",
+      "classes": "nav-card",
+      "text": " Jetzt SWM Solar Komplettpaket entdecken! Maßgeschneiderte Lösungen, hochwertige Komponenten & koste",
+      "styles": {
+        "backgroundColor": "rgb(239, 247, 254)",
+        "borderRadius": "8px",
+        "padding": "20px",
+        "boxShadow": "none",
+        "width": "185px",
+        "height": "272px"
+      }
+    },
+    {
+      "tag": "LI",
+      "classes": "nav-card",
+      "text": "M/Solar Business Photovoltaik für Unternehmen",
+      "styles": {
+        "backgroundColor": "rgb(239, 247, 254)",
+        "borderRadius": "8px",
+        "padding": "20px",
+        "boxShadow": "none",
+        "width": "185px",
+        "height": "120px"
+      }
+    },
+    {
+      "tag": "LI",
+      "classes": "nav-card",
+      "text": "M/Mieterstrom Mieterstrom-Modell für WEGs",
+      "styles": {
+        "backgroundColor": "rgb(239, 247, 254)",
+        "borderRadius": "8px",
+        "padding": "20px",
+        "boxShadow": "none",
+        "width": "185px",
+        "height": "120px"
+      }
+    },
+    {
+      "tag": "LI",
+      "classes": "nav-card",
+      "text": "E-mobil in München Elektromobilität bei den SWM",
+      "styles": {
+        "backgroundColor": "rgb(239, 247, 254)",
+        "borderRadius": "8px",
+        "padding": "20px",
+        "boxShadow": "none",
+        "width": "185px",
+        "height": "148px"
+      }
+    },
+    {
+      "tag": "LI",
+      "classes": "nav-card",
+      "text": "Anfrageformular Finden Sie die passende M-Ladelösung",
+      "styles": {
+        "backgroundColor": "rgb(239, 247, 254)",
+        "borderRadius": "8px",
+        "padding": "20px",
+        "boxShadow": "none",
+        "width": "185px",
+        "height": "144px"
+      }
+    },
+    {
+      "tag": "LI",
+      "classes": "nav-card",
+      "text": "Gewerbliche M-Ladelösung Ladeinfrastruktur für Unternehmen",
+      "styles": {
+        "backgroundColor": "rgb(239, 247, 254)",
+        "borderRadius": "8px",
+        "padding": "20px",
+        "boxShadow": "none",
+        "width": "185px",
+        "height": "148px"
+      }
+    },
+    {
+      "tag": "LI",
+      "classes": "nav-card",
+      "text": "M-Ladelösung mit PV-Anlage Zum Vorteilspaket",
+      "styles": {
+        "backgroundColor": "rgb(239, 247, 254)",
+        "borderRadius": "8px",
+        "padding": "20px",
+        "boxShadow": "none",
+        "width": "185px",
+        "height": "124px"
+      }
+    },
+    {
+      "tag": "LI",
+      "classes": "nav-card",
+      "text": "Sauna-Events Besondere Erlebnisse in der Sauna genießen",
+      "styles": {
+        "backgroundColor": "rgb(239, 247, 254)",
+        "borderRadius": "8px",
+        "padding": "20px",
+        "boxShadow": "none",
+        "width": "190.859px",
+        "height": "144px"
+      }
+    },
+    {
+      "tag": "LI",
+      "classes": "nav-card",
+      "text": "Gemeinwohlbericht M-Bäder handeln gemeinwohlorientiert",
+      "styles": {
+        "backgroundColor": "rgb(239, 247, 254)",
+        "borderRadius": "8px",
+        "padding": "20px",
+        "boxShadow": "none",
+        "width": "190.859px",
+        "height": "120px"
+      }
+    }
+  ],
+  "svgIcons": [
+    {
+      "width": null,
+      "height": null,
+      "viewBox": "0 0 25 25",
+      "parentClasses": "cmptogglespan cmpvnspan-1xc1",
+      "fill": "rgb(0, 0, 0)",
+      "innerHTML": "<defs><path d=\"M8.96404266,16.5434115 C8.82225357,16.4083454 7.5953435,15.1407175 5.28331247,12.740528 C4.90556251,12.3806892 4.90556251,11.7972753 5.28331247,11.4374365 C5.66106242,11.0775977 6.27351611,11.0775977 6.65126607,11.4374365 L10.2512084,14.5164585 L17.3443983,7.27058769 C17.7231401,6.9098041 18.3372019,6.9098041 18.7159437,7.27058769 C19.0946854,7.63137128 19.0946854,8.21631705 18.7159437,8.57710064 C14.5137232,13.5449854 12.1818466,16.2004223 11.720314,16.5434115 C11.0280151,17.0578"
+    },
+    {
+      "width": null,
+      "height": null,
+      "viewBox": "0 0 25 25",
+      "parentClasses": "cmptogglespan cmpvnspan-1xc2",
+      "fill": "rgb(0, 0, 0)",
+      "innerHTML": "<defs><path d=\"M8.96404266,16.5434115 C8.82225357,16.4083454 7.5953435,15.1407175 5.28331247,12.740528 C4.90556251,12.3806892 4.90556251,11.7972753 5.28331247,11.4374365 C5.66106242,11.0775977 6.27351611,11.0775977 6.65126607,11.4374365 L10.2512084,14.5164585 L17.3443983,7.27058769 C17.7231401,6.9098041 18.3372019,6.9098041 18.7159437,7.27058769 C19.0946854,7.63137128 19.0946854,8.21631705 18.7159437,8.57710064 C14.5137232,13.5449854 12.1818466,16.2004223 11.720314,16.5434115 C11.0280151,17.0578"
+    },
+    {
+      "width": null,
+      "height": null,
+      "viewBox": "0 0 25 25",
+      "parentClasses": "cmptogglespan cmpvnspan-1xc3",
+      "fill": "rgb(0, 0, 0)",
+      "innerHTML": "<defs><path d=\"M8.96404266,16.5434115 C8.82225357,16.4083454 7.5953435,15.1407175 5.28331247,12.740528 C4.90556251,12.3806892 4.90556251,11.7972753 5.28331247,11.4374365 C5.66106242,11.0775977 6.27351611,11.0775977 6.65126607,11.4374365 L10.2512084,14.5164585 L17.3443983,7.27058769 C17.7231401,6.9098041 18.3372019,6.9098041 18.7159437,7.27058769 C19.0946854,7.63137128 19.0946854,8.21631705 18.7159437,8.57710064 C14.5137232,13.5449854 12.1818466,16.2004223 11.720314,16.5434115 C11.0280151,17.0578"
+    },
+    {
+      "width": null,
+      "height": null,
+      "viewBox": "0 0 25 25",
+      "parentClasses": "cmptogglespan cmpvnspan-1xc4",
+      "fill": "rgb(0, 0, 0)",
+      "innerHTML": "<defs><path d=\"M8.96404266,16.5434115 C8.82225357,16.4083454 7.5953435,15.1407175 5.28331247,12.740528 C4.90556251,12.3806892 4.90556251,11.7972753 5.28331247,11.4374365 C5.66106242,11.0775977 6.27351611,11.0775977 6.65126607,11.4374365 L10.2512084,14.5164585 L17.3443983,7.27058769 C17.7231401,6.9098041 18.3372019,6.9098041 18.7159437,7.27058769 C19.0946854,7.63137128 19.0946854,8.21631705 18.7159437,8.57710064 C14.5137232,13.5449854 12.1818466,16.2004223 11.720314,16.5434115 C11.0280151,17.0578"
+    },
+    {
+      "width": null,
+      "height": null,
+      "viewBox": null,
+      "parentClasses": "",
+      "fill": "rgb(0, 0, 0)",
+      "innerHTML": "\n    <symbol id=\"appointment\">\n        <g>\n            <path d=\"M47.23 45.32l.38.01.45.03.25.02.54.05.6.06.32.04c1.75.23 3.5.62 5.16 1.2C60 48.5 63.28 51.82 63.27 57v.23c-.3 3.43-4.19 6.1-12.94 6.6l-.86.04a55.9 55.9 0 01-6.25-.1l-.8-.06-1.14-.13-.73-.1c-6.5-.96-9.36-3.46-9.47-6.56 0-5.15 3.34-8.47 8.49-10.24 1.66-.57 3.42-.94 5.17-1.16l.28-.04.53-.06.48-.04.43-.03.37-.02.3-.01h.1zM29.36 32.97c1.4 0 2.54.05 3.89.18a2.5 2.5 0 11-.49 4.98c-1-.1-1.86-.14-2.88-.15h-1.46l-.69.04c-.95.04-2.03.13-3.21.2"
+    },
+    {
+      "width": "16px",
+      "height": "16px",
+      "viewBox": "0 0 64 64",
+      "parentClasses": "btn btn--transparent btn--int header__skip",
+      "fill": "rgb(0, 0, 0)",
+      "innerHTML": "<use href=\"#link\" fill=\"currentColor\"></use>"
+    },
+    {
+      "width": "88px",
+      "height": "29px",
+      "viewBox": "0 0 182 61",
+      "parentClasses": "",
+      "fill": "rgb(0, 0, 0)",
+      "innerHTML": "<!----><!----><use href=\"#logo\" style=\"color: currentcolor;\"></use>"
+    },
+    {
+      "width": "20px",
+      "height": "20px",
+      "viewBox": "0 0 64 64",
+      "parentClasses": "navi__icon-item navi__mobile-item",
+      "fill": "rgb(0, 0, 0)",
+      "innerHTML": "<!----><!----><use href=\"#person\" style=\"color: currentcolor;\"></use>"
+    },
+    {
+      "width": "100%",
+      "height": "100%",
+      "viewBox": "0 0 64 64",
+      "parentClasses": "search-input-btn",
+      "fill": "rgb(0, 0, 0)",
+      "innerHTML": "<!----><!----><use href=\"#search\" style=\"color: currentcolor;\"></use>"
+    },
+    {
+      "width": "20px",
+      "height": "20px",
+      "viewBox": "0 0 64 64",
+      "parentClasses": "navi__burger navi__mobile-item",
+      "fill": "rgb(0, 0, 0)",
+      "innerHTML": "<!----><!----><use href=\"#burger\" style=\"color: currentcolor;\"></use>"
+    },
+    {
+      "width": "20px",
+      "height": "20px",
+      "viewBox": "0 0 64 64",
+      "parentClasses": "navi__burger navi__mobile-item",
+      "fill": "rgb(0, 0, 0)",
+      "innerHTML": "<!----><!----><use href=\"#close\" style=\"color: currentcolor;\"></use>"
+    },
+    {
+      "width": "88px",
+      "height": "29px",
+      "viewBox": "0 0 182 61",
+      "parentClasses": "",
+      "fill": "rgb(0, 0, 0)",
+      "innerHTML": "<!----><!----><use href=\"#logo\" style=\"color: currentcolor;\"></use>"
+    },
+    {
+      "width": "20px",
+      "height": "20px",
+      "viewBox": "0 0 64 64",
+      "parentClasses": "nav-menu__link nav-menu__link__trigger copy",
+      "fill": "rgb(0, 0, 0)",
+      "innerHTML": "<!----><!----><use href=\"#chevron\" style=\"color: currentcolor;\"></use>"
+    },
+    {
+      "width": "20px",
+      "height": "20px",
+      "viewBox": "0 0 64 64",
+      "parentClasses": "nav-list__link--previous",
+      "fill": "rgb(0, 0, 0)",
+      "innerHTML": "<!----><!----><use href=\"#chevron\" style=\"color: currentcolor;\"></use>"
+    },
+    {
+      "width": "24px",
+      "height": "24px",
+      "viewBox": "0 0 64 64",
+      "parentClasses": "",
+      "fill": "rgb(0, 0, 0)",
+      "innerHTML": "<!----><!----><use href=\"#energy\" style=\"color: currentcolor;\"></use>"
+    },
+    {
+      "width": "24px",
+      "height": "24px",
+      "viewBox": "0 0 64 64",
+      "parentClasses": "",
+      "fill": "rgb(0, 0, 0)",
+      "innerHTML": "<!----><!----><use href=\"#info\" style=\"color: currentcolor;\"></use>"
+    },
+    {
+      "width": "24px",
+      "height": "24px",
+      "viewBox": "0 0 64 64",
+      "parentClasses": "headline-s nav-card__headline",
+      "fill": "rgb(0, 0, 0)",
+      "innerHTML": "<!----><!----><use href=\"#digital\" style=\"color: currentcolor;\"></use>"
+    },
+    {
+      "width": "20px",
+      "height": "20px",
+      "viewBox": "0 0 64 64",
+      "parentClasses": "nav-menu__link nav-menu__link__trigger copy",
+      "fill": "rgb(0, 0, 0)",
+      "innerHTML": "<!----><!----><use href=\"#chevron\" style=\"color: currentcolor;\"></use>"
+    },
+    {
+      "width": "20px",
+      "height": "20px",
+      "viewBox": "0 0 64 64",
+      "parentClasses": "nav-list__link--previous",
+      "fill": "rgb(0, 0, 0)",
+      "innerHTML": "<!----><!----><use href=\"#chevron\" style=\"color: currentcolor;\"></use>"
+    },
+    {
+      "width": "24px",
+      "height": "24px",
+      "viewBox": "0 0 64 64",
+      "parentClasses": "",
+      "fill": "rgb(0, 0, 0)",
+      "innerHTML": "<!----><!----><use href=\"#gas\" style=\"color: currentcolor;\"></use>"
+    }
+  ],
+  "images": [
+    {
+      "src": "https://cdn.consentmanager.net/delivery/img/logo1653988026x5745.gif",
+      "alt": "Logo",
+      "width": 147,
+      "height": 50
+    },
+    {
+      "src": "https://cdn.consentmanager.net/delivery/whitelabel/cmplogo.svg",
+      "alt": "consentmanager.de",
+      "width": 14,
+      "height": 14
+    },
+    {
+      "src": "https://www.swm.de/.imaging/mte/swm/content-stage-image-large-1x/dam/img/tarife-angebote/baeder/schwimmen-und-saunieren/h-schwimmen-und-saunieren.jpg/jcr:content/h-schwimmen-und-saunieren.jpg",
+      "alt": "Badehalle im Nordbad",
+      "width": 1920,
+      "height": 550
+    },
+    {
+      "src": "https://www.swm.de/.imaging/mte/swm/award-image/dam/img/kundenservice/auszeichnungen/footer/f-servicepreis-online-service-energie-2021.png/jcr:content/f-servicepreis-online-service-energie-2021.png",
+      "alt": "Deutscher Servicepreis 2021 Online-Service Energie",
+      "width": 125,
+      "height": 70
+    },
+    {
+      "src": "https://www.swm.de/.imaging/mte/swm/award-image/dam/img/kundenservice/auszeichnungen/footer/f-focus-money-fairster-stromversorger.png/jcr:content/f-focus-money-fairster-stromversorger.png",
+      "alt": "Auszeichnung FOCUS-MONEY Fairster Stromversorger",
+      "width": 125,
+      "height": 70
+    },
+    {
+      "src": "https://www.swm.de/.imaging/mte/swm/award-image/dam/img/kundenservice/auszeichnungen/footer/f-top-lokalversorger.png/jcr:content/f-top-lokalversorger.png",
+      "alt": "Auszeichnung Top Lokalversorger Strom und Gas",
+      "width": 125,
+      "height": 70
+    },
+    {
+      "src": "https://www.swm.de/.imaging/mte/swm/award-image/dam/img/kundenservice/auszeichnungen/footer/f-focus-money-fairster-gasversorger.png/jcr:content/f-focus-money-fairster-gasversorger.png",
+      "alt": "Auszeichnung FOCUS-MONEY Gasversorger",
+      "width": 125,
+      "height": 70
+    },
+    {
+      "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAOCAQAAAD3ApbNAAAAAW9yTlQBz6J3mgAAApFJREFUOMudlF+IVAUYxX/n3us44+zOOrtKzkygS6WGq7CCkFBpLyv1mIH5EPWQEZLGvoQYKmLkvwfDniJzEVHEjHrZMEJhW0wD20xUyNE1xD8LLruxw7rbzL33+FAR+qLseTxwDud7+H2CEsygS2+5kwpQ1UkO3Pmj7DtMRSqh2d7EO2r9xzBKuciH/ing9hQKI+XYrA2EQIMxpIIjFck8LljGUo7Y9bsPF/IabzsUvsQXuk7KEr3KZ9lTfz+yr4LneBU/uzr0n5VjJ79w9JGFrKEoqLJZz/IRNb6iJxidLLilNKER5CY13KIJj9KhvWz1YAW3eRqjhKykpmIpw3BI2uosY9FYxFIjOM5SbyHUX3zj4aRdO9Tu1Pt1QXuYYDH32MLrtHmdzrqTjWrijHaT8AorVKA7DemmlbvJroCngXHu6Q1CTbKNI4L79PugUn3AHJaT1R7a6OYcNX2rGWzlInupEhKQ4TvK7mLI33NMi3g3+vd0G0HgmUSK1cFa/UaO6co7pT85HLykDo24zlXyFPma3jCM8xInOcD7auZlreE8kYsBt4A8szjhOhlt0nuGF5jHACPMZBZmdfCxVnHDNcSblLnt9d6WfM58UoyBLF2u+1cmWRg2v6hF4Kc4qH4mucBp1RlmLs/7jMwgK7mpdv5kl69R0TPuU686tYQqfSrxO1dY4POc1jK1cFatKq/mSxeFL9PDFazFXqsftc/3Ne4sC+nlEw6RPjfexrk809OxcjzUpIxqSawcMQ1yToI6BceqO69yjk/Z4FCQuAY0K6TBjmhnGhvPYzvH3SueFMSwEGuADAuUc6CssgRYNzihSxio8YOvRmmD8Sdl+f/nQCcVEgbpo2faQJLemgLJ8ADFWglNX5GQXgAAAABJRU5ErkJggg==",
+      "alt": "Captcha Text logo",
+      "width": 40,
+      "height": 14
+    },
+    {
+      "src": "https://cdn.consentmanager.net/delivery/recall/recall_cookie.svg",
+      "alt": "Datenschutz-Einstellungen",
+      "width": 20,
+      "height": 20
+    }
+  ],
+  "pageTitle": "Echtzeit-Auslastung der M-Bäder und M-Saunen",
+  "htmlSnippets": {
+    "facilitySection": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24px\" height=\"24px\" viewBox=\"0 0 64 64\" class=\"icon-base icon-base--baeder3\" aria-hidden=\"true\" role=\"img\" focusable=\"false\" data-name=\"baeder3\"><!----><!----><use href=\"#baeder3\" style=\"color: currentcolor;\"></use></svg>"
+  },
+  "capturedAt": "2026-01-18T13:23:55.528Z"
+}
