@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { BucketData } from '../types';
 import { getWeatherIcon } from '../utils/weatherIcons';
+import { theme } from '../styles/theme';
 
 const WeatherContainer = styled.div`
   display: flex;
-  border-bottom: 1px solid #e0e0e0;
-  background: #fafafa;
-  padding: 8px 0;
+  border-bottom: 1px solid ${theme.colors.border};
+  background: ${theme.colors.background.light};
+  padding: ${theme.spacing.s} 0;
 `;
 
 const WeatherRow = styled.div`
@@ -24,12 +25,12 @@ const WeatherCell = styled.div`
 `;
 
 const WeatherIcon = styled.span`
-  font-size: 16px;
+  font-size: ${theme.typography.fontSize.body};
 `;
 
 const WeatherValue = styled.span`
   font-size: 11px;
-  color: #666;
+  color: ${theme.colors.text.secondary};
   white-space: nowrap;
 `;
 
@@ -41,12 +42,12 @@ const AxisLabels = styled.div<{ $width: number }>`
   align-items: flex-end;
   justify-content: center;
   gap: 2px;
-  padding-right: 8px;
+  padding-right: ${theme.spacing.s};
 `;
 
 const AxisLabel = styled.span`
   font-size: 11px;
-  color: #999;
+  color: ${theme.colors.text.muted};
   line-height: 16px;
 `;
 

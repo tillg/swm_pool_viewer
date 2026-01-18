@@ -38,7 +38,7 @@ function getMostCommonWeatherCode(codes: number[]): number {
 export function aggregateData(
   data: RawDataPoint[],
   timeRange: TimeRange
-): { buckets: BucketData[]; facilities: string[] } {
+): { buckets: BucketData[]; facilities: string[]; facilityTypes: Map<string, string> } {
   const { start, end } = getTimeRange(timeRange);
   const timeSpan = end.getTime() - start.getTime();
   const bucketSize = timeSpan / BUCKET_COUNT;
@@ -51,9 +51,15 @@ export function aggregateData(
     return inRange && isOpen;
   });
 
-  // Get unique facilities
+  // Get unique facilities and their types
   const facilitiesSet = new Set<string>();
-  filteredData.forEach(point => facilitiesSet.add(point.pool_name));
+  const facilityTypeMap = new Map<string, string>();
+  filteredData.forEach(point => {
+    facilitiesSet.add(point.pool_name);
+    if (!facilityTypeMap.has(point.pool_name)) {
+      facilityTypeMap.set(point.pool_name, point.facility_type);
+    }
+  });
   const facilities = Array.from(facilitiesSet).sort();
 
   // Initialize buckets
@@ -137,5 +143,5 @@ export function aggregateData(
     bucket.weatherCode = getMostCommonWeatherCode(raw.weatherCodes);
   }
 
-  return { buckets, facilities };
+  return { buckets, facilities, facilityTypes: facilityTypeMap };
 }

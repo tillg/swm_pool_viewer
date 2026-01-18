@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { theme } from '../styles/theme';
 
 const spin = keyframes`
   0% { transform: rotate(0deg); }
@@ -11,21 +12,21 @@ const SpinnerContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 400px;
-  gap: 16px;
+  gap: ${theme.spacing.m};
 `;
 
 const SpinnerRing = styled.div`
   width: 48px;
   height: 48px;
-  border: 4px solid #e0e0e0;
-  border-top-color: #4e79a7;
-  border-radius: 50%;
+  border: 4px solid ${theme.colors.border};
+  border-top-color: ${theme.colors.brand.secondary};
+  border-radius: ${theme.borderRadius.round};
   animation: ${spin} 1s linear infinite;
 `;
 
 const LoadingText = styled.span`
-  color: #666;
-  font-size: 14px;
+  color: ${theme.colors.text.secondary};
+  font-size: ${theme.typography.fontSize.bodySmall};
 `;
 
 export function Spinner() {

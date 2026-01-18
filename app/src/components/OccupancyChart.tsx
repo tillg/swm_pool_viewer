@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import * as d3 from 'd3';
 import { BucketData } from '../types';
+import { theme } from '../styles/theme';
 
 const ChartContainer = styled.div`
   width: 100%;
@@ -70,7 +71,7 @@ export function OccupancyChart({
       .call(xAxis)
       .selectAll('text')
       .style('font-size', '11px')
-      .style('fill', '#666');
+      .style('fill', theme.colors.text.secondary);
 
     // Y axis
     const yAxis = d3
@@ -83,7 +84,7 @@ export function OccupancyChart({
       .call(yAxis)
       .selectAll('text')
       .style('font-size', '11px')
-      .style('fill', '#666');
+      .style('fill', theme.colors.text.secondary);
 
     // Grid lines
     g.append('g')
@@ -96,7 +97,7 @@ export function OccupancyChart({
       .attr('x2', innerWidth)
       .attr('y1', d => yScale(d))
       .attr('y2', d => yScale(d))
-      .attr('stroke', '#e0e0e0')
+      .attr('stroke', theme.colors.border)
       .attr('stroke-dasharray', '3,3');
 
     // Line generator
