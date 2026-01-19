@@ -4,7 +4,7 @@ Dies ist mein eigener Notizzettel, was ich gerne noch machen würde.
 
 ## Fehler
 
-- Aktuell sind die Daten nicht vollständig. Es fehlt mindestens ein Pool, und die Daten zurEisbahn im Prinzi.
+- Aktuell sind die Daten nicht vollständig. Es fehlt mindestens ein Pool, und die Daten zur Eisbahn im Prinzi.
 
 ## Funktionen
 
