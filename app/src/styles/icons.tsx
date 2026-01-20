@@ -67,6 +67,26 @@ export const IceRinkIcon: React.FC<IconProps> = ({ size = 24, color = 'currentCo
 );
 
 /**
+ * Other/Building icon
+ * Used for: Unknown facility types
+ */
+export const OtherIcon: React.FC<IconProps> = ({ size = 24, color = 'currentColor', className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 64 64"
+    className={className}
+    aria-hidden="true"
+    role="img"
+  >
+    <g fill={color}>
+      <path d="M52 8H12c-2.2 0-4 1.8-4 4v44c0 1.1.9 2 2 2h8V46c0-1.1.9-2 2-2h24c1.1 0 2 .9 2 2v12h8c1.1 0 2-.9 2-2V12c0-2.2-1.8-4-4-4zM20 38h-4c-1.1 0-2-.9-2-2v-4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2v4c0 1.1-.9 2-2 2zm0-14h-4c-1.1 0-2-.9-2-2v-4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2v4c0 1.1-.9 2-2 2zm14 14h-4c-1.1 0-2-.9-2-2v-4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2v4c0 1.1-.9 2-2 2zm0-14h-4c-1.1 0-2-.9-2-2v-4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2v4c0 1.1-.9 2-2 2zm14 14h-4c-1.1 0-2-.9-2-2v-4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2v4c0 1.1-.9 2-2 2zm0-14h-4c-1.1 0-2-.9-2-2v-4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2v4c0 1.1-.9 2-2 2z" />
+    </g>
+  </svg>
+);
+
+/**
  * Get the appropriate icon component for a facility type
  */
 export function getFacilityIcon(facilityType: 'pool' | 'sauna' | 'ice'): React.FC<IconProps> {

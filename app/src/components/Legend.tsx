@@ -1,14 +1,35 @@
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
-import { PoolIcon, SaunaIcon, IceRinkIcon } from '../styles/icons';
+import { PoolIcon, SaunaIcon, IceRinkIcon, OtherIcon } from '../styles/icons';
 
-const LegendContainer = styled.div`
+const ScrollTrack = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: ${theme.colors.border};
+  border-radius: 3px;
+`;
+
+const LegendScroller = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
   padding: ${theme.spacing.s} 0;
+  padding-right: 12px;
   max-height: 400px;
   overflow-y: auto;
+
+  /* Hide native scrollbar */
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const LegendContainer = styled.div`
+  position: relative;
 `;
 
 const GroupHeader = styled.label`
@@ -100,9 +121,10 @@ function getFacilityIcon(facilityType: string) {
     case 'eislauf':
     case 'eislaufbahn':
     case 'ice':
+    case 'ice_rink':
       return IceRinkIcon;
     default:
-      return PoolIcon;
+      return OtherIcon;
   }
 }
 
@@ -117,9 +139,10 @@ function getGroupKey(facilityType: string): string {
     case 'eislauf':
     case 'eislaufbahn':
     case 'ice':
+    case 'ice_rink':
       return 'ice';
     default:
-      return 'pool';
+      return 'other';
   }
 }
 
@@ -130,7 +153,9 @@ function getGroupLabel(groupKey: string): string {
     case 'sauna':
       return 'Saunen';
     case 'ice':
-      return 'Eislauf';
+      return 'Eislaufbahnen';
+    case 'other':
+      return 'Andere';
     default:
       return groupKey;
   }
@@ -144,12 +169,14 @@ function getGroupIcon(groupKey: string) {
       return SaunaIcon;
     case 'ice':
       return IceRinkIcon;
+    case 'other':
+      return OtherIcon;
     default:
-      return PoolIcon;
+      return OtherIcon;
   }
 }
 
-const GROUP_ORDER = ['pool', 'sauna', 'ice'];
+const GROUP_ORDER = ['pool', 'sauna', 'ice', 'other'];
 
 export function Legend({ facilities, facilityTypes, colorMap, visibility, onToggle, onToggleGroup }: LegendProps) {
   // Group facilities by type
@@ -170,49 +197,52 @@ export function Legend({ facilities, facilityTypes, colorMap, visibility, onTogg
 
   return (
     <LegendContainer>
-      {sortedGroups.map(([groupKey, groupFacilities]) => {
-        const GroupIcon = getGroupIcon(groupKey);
-        const allVisible = groupFacilities.every(f => visibility.get(f) ?? true);
-        const someVisible = groupFacilities.some(f => visibility.get(f) ?? true);
+      <LegendScroller>
+        {sortedGroups.map(([groupKey, groupFacilities]) => {
+          const GroupIcon = getGroupIcon(groupKey);
+          const allVisible = groupFacilities.every(f => visibility.get(f) ?? true);
+          const someVisible = groupFacilities.some(f => visibility.get(f) ?? true);
 
-        return (
-          <div key={groupKey}>
-            <GroupHeader>
-              <Checkbox
-                type="checkbox"
-                checked={allVisible}
-                ref={(el) => {
-                  if (el) el.indeterminate = someVisible && !allVisible;
-                }}
-                onChange={() => onToggleGroup(groupFacilities, !allVisible)}
-              />
-              <GroupIconWrapper>
-                <GroupIcon size={18} />
-              </GroupIconWrapper>
-              <GroupName>{getGroupLabel(groupKey)}</GroupName>
-            </GroupHeader>
-            {groupFacilities.map(facility => {
-              const color = colorMap.get(facility) || '#999';
-              const visible = visibility.get(facility) ?? true;
-              const facilityType = facilityTypes.get(facility) || 'pool';
-              const Icon = getFacilityIcon(facilityType);
-              return (
-                <LegendItem key={facility}>
-                  <Checkbox
-                    type="checkbox"
-                    checked={visible}
-                    onChange={() => onToggle(facility)}
-                  />
-                  <IconWrapper $color={color} $visible={visible}>
-                    <Icon size={18} />
-                  </IconWrapper>
-                  <FacilityName $visible={visible} title={facility}>{facility}</FacilityName>
-                </LegendItem>
-              );
-            })}
-          </div>
-        );
-      })}
+          return (
+            <div key={groupKey}>
+              <GroupHeader>
+                <Checkbox
+                  type="checkbox"
+                  checked={allVisible}
+                  ref={(el) => {
+                    if (el) el.indeterminate = someVisible && !allVisible;
+                  }}
+                  onChange={() => onToggleGroup(groupFacilities, !allVisible)}
+                />
+                <GroupIconWrapper>
+                  <GroupIcon size={18} />
+                </GroupIconWrapper>
+                <GroupName>{getGroupLabel(groupKey)}</GroupName>
+              </GroupHeader>
+              {groupFacilities.map(facility => {
+                const color = colorMap.get(facility) || '#999';
+                const visible = visibility.get(facility) ?? true;
+                const facilityType = facilityTypes.get(facility) || 'pool';
+                const Icon = getFacilityIcon(facilityType);
+                return (
+                  <LegendItem key={facility}>
+                    <Checkbox
+                      type="checkbox"
+                      checked={visible}
+                      onChange={() => onToggle(facility)}
+                    />
+                    <IconWrapper $color={color} $visible={visible}>
+                      <Icon size={18} />
+                    </IconWrapper>
+                    <FacilityName $visible={visible} title={facility}>{facility}</FacilityName>
+                  </LegendItem>
+                );
+              })}
+            </div>
+          );
+        })}
+      </LegendScroller>
+      <ScrollTrack />
     </LegendContainer>
   );
 }
