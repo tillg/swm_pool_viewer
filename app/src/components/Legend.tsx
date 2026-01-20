@@ -206,7 +206,7 @@ export function Legend({ facilities, facilityTypes, colorMap, visibility, onTogg
                   <IconWrapper $color={color} $visible={visible}>
                     <Icon size={18} />
                   </IconWrapper>
-                  <FacilityName $visible={visible}>{facility}</FacilityName>
+                  <FacilityName $visible={visible} title={facility}>{facility}</FacilityName>
                 </LegendItem>
               );
             })}

@@ -88,7 +88,7 @@ const ChartSection = styled.div`
 `;
 
 const LegendSection = styled.div`
-  width: 220px;
+  width: 280px;
   flex-shrink: 0;
   background: ${theme.colors.background.page};
   border: 1px solid ${theme.colors.border};
