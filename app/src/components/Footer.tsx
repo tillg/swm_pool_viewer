@@ -37,7 +37,19 @@ const LinkContainer = styled.div`
   gap: ${theme.spacing.l};
 `;
 
+const BuildInfoRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: ${theme.spacing.m};
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #888888;
+`;
+
 export function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <FooterContainer>
       <FooterContent>
@@ -45,6 +57,10 @@ export function Footer() {
           <FooterLink to="/impressum">Impressum</FooterLink>
           <FooterLink to="/todo">Was noch kommt</FooterLink>
         </LinkContainer>
+        <BuildInfoRow>
+          <span>Build {BUILD_NUMBER} vom {BUILD_DATE} (Deutsche Zeit)</span>
+          <span>© {currentYear} Till Gartner</span>
+        </BuildInfoRow>
       </FooterContent>
     </FooterContainer>
   );
