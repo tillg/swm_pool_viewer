@@ -8,18 +8,18 @@ const POOL_IMAGES = [
   '/pool-3.jpg',
   '/pool-4.jpg',
   '/pool-5.jpg',
-  '/pool-6.jpg',
-  '/pool-7.jpg',
-  '/pool-8.jpg',
-  '/pool-9.jpg',
-  '/pool-10.jpg',
 ];
 
 const HeroContainer = styled.section`
   position: relative;
   width: 100%;
   height: 400px;
-  overflow: hidden;
+  overflow: visible;
+
+  ${theme.mediaQueries.mobile} {
+    height: auto;
+    margin-bottom: 80px;
+  }
 `;
 
 const HeroImage = styled.div<{ $imageUrl: string }>`
@@ -31,6 +31,11 @@ const HeroImage = styled.div<{ $imageUrl: string }>`
   background-image: url(${props => props.$imageUrl});
   background-size: cover;
   background-position: center;
+
+  ${theme.mediaQueries.mobile} {
+    position: relative;
+    height: 250px;
+  }
 `;
 
 const HeroContent = styled.div`
@@ -41,12 +46,28 @@ const HeroContent = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+
+  ${theme.mediaQueries.mobile} {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(50%);
+    height: auto;
+    padding: 0 ${theme.spacing.m};
+  }
 `;
 
 const HeroBox = styled.div`
   background: ${theme.colors.brand.primary};
   padding: 60px 60px 64px;
   max-width: 580px;
+
+  ${theme.mediaQueries.mobile} {
+    width: 100%;
+    max-width: none;
+    padding: 24px 20px 28px;
+  }
 `;
 
 const HeroTitle = styled.h1`
@@ -55,6 +76,11 @@ const HeroTitle = styled.h1`
   font-size: ${theme.typography.fontSize.headlineXL};
   line-height: 1.15;
   margin: 0;
+
+  ${theme.mediaQueries.mobile} {
+    font-size: 24px;
+    line-height: 1.25;
+  }
 `;
 
 export function Hero() {

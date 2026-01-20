@@ -76,6 +76,10 @@ const Header = styled.div`
 const MainContent = styled.div`
   display: flex;
   gap: ${theme.spacing.xl};
+
+  ${theme.mediaQueries.mobile} {
+    flex-direction: column;
+  }
 `;
 
 const ChartSection = styled.div`
@@ -85,6 +89,17 @@ const ChartSection = styled.div`
   border: 1px solid ${theme.colors.border};
   border-radius: ${theme.borderRadius.large};
   overflow: hidden;
+
+  ${theme.mediaQueries.mobile} {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+`;
+
+const ChartScrollContainer = styled.div`
+  ${theme.mediaQueries.mobile} {
+    min-width: 700px;
+  }
 `;
 
 const LegendSection = styled.div`
@@ -94,6 +109,10 @@ const LegendSection = styled.div`
   border: 1px solid ${theme.colors.border};
   border-radius: ${theme.borderRadius.large};
   padding: ${theme.spacing.s} ${theme.spacing.s} ${theme.spacing.s} ${theme.spacing.s};
+
+  ${theme.mediaQueries.mobile} {
+    width: 100%;
+  }
 `;
 
 const LegendTitle = styled.h3`
@@ -223,20 +242,22 @@ function App() {
 
           <MainContent>
             <ChartSection>
-              <WeatherHeader
-                buckets={buckets}
-                leftMargin={CHART_MARGIN.left}
-                rightMargin={CHART_MARGIN.right}
-              />
-              <OccupancyChart
-                buckets={buckets}
-                facilities={facilities}
-                colorMap={colorMap}
-                visibility={visibility}
-                width={CHART_WIDTH}
-                height={CHART_HEIGHT}
-                margin={CHART_MARGIN}
-              />
+              <ChartScrollContainer>
+                <WeatherHeader
+                  buckets={buckets}
+                  leftMargin={CHART_MARGIN.left}
+                  rightMargin={CHART_MARGIN.right}
+                />
+                <OccupancyChart
+                  buckets={buckets}
+                  facilities={facilities}
+                  colorMap={colorMap}
+                  visibility={visibility}
+                  width={CHART_WIDTH}
+                  height={CHART_HEIGHT}
+                  margin={CHART_MARGIN}
+                />
+              </ChartScrollContainer>
             </ChartSection>
 
             <LegendSection>

@@ -30,11 +30,20 @@ const FooterLink = styled(Link)`
   &::after {
     content: ' >>';
   }
+
+  ${theme.mediaQueries.mobile} {
+    min-height: 44px;
+  }
 `;
 
 const LinkContainer = styled.div`
   display: flex;
   gap: ${theme.spacing.l};
+
+  ${theme.mediaQueries.mobile} {
+    flex-direction: column;
+    gap: ${theme.spacing.m};
+  }
 `;
 
 const BuildInfoRow = styled.div`
@@ -45,6 +54,11 @@ const BuildInfoRow = styled.div`
   font-weight: 400;
   line-height: 18px;
   color: #888888;
+
+  ${theme.mediaQueries.mobile} {
+    flex-direction: column;
+    gap: ${theme.spacing.xs};
+  }
 `;
 
 export function Footer() {

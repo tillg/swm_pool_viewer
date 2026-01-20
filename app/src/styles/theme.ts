@@ -103,6 +103,15 @@ export const theme = {
     contentMaxWidth: '1200px',
     contentPadding: '20px',
   },
+
+  breakpoints: {
+    mobile: '768px',  // < 768px is mobile
+  },
+
+  mediaQueries: {
+    mobile: '@media (max-width: 767px)',
+    tablet: '@media (min-width: 768px)',
+  },
 } as const;
 
 export type Theme = typeof theme;

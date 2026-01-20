@@ -52,6 +52,11 @@ const GroupHeader = styled.label`
   &:hover {
     background: ${theme.colors.border};
   }
+
+  ${theme.mediaQueries.mobile} {
+    min-height: 44px;
+    padding: ${theme.spacing.s} ${theme.spacing.m};
+  }
 `;
 
 const GroupIconWrapper = styled.span`
@@ -75,6 +80,12 @@ const LegendItem = styled.label`
   &:hover {
     background: ${theme.colors.background.light};
   }
+
+  ${theme.mediaQueries.mobile} {
+    min-height: 44px;
+    padding: ${theme.spacing.s} ${theme.spacing.m};
+    padding-left: ${theme.spacing.xl};
+  }
 `;
 
 const IconWrapper = styled.span<{ $color: string; $visible: boolean }>`
@@ -88,6 +99,11 @@ const IconWrapper = styled.span<{ $color: string; $visible: boolean }>`
 const Checkbox = styled.input`
   margin: 0;
   cursor: pointer;
+
+  ${theme.mediaQueries.mobile} {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 const FacilityName = styled.span<{ $visible: boolean }>`
