@@ -38,7 +38,7 @@ function getMostCommonWeatherCode(codes: number[]): number {
 export function aggregateData(
   data: RawDataPoint[],
   timeRange: TimeRange
-): { buckets: BucketData[]; facilities: string[]; facilityTypes: Map<string, string> } {
+): { buckets: BucketData[]; facilities: string[]; facilityTypes: Map<string, string>; lastDataTimestamp: Date | null } {
   const { start, end } = getTimeRange(timeRange);
   const timeSpan = end.getTime() - start.getTime();
   const bucketSize = timeSpan / BUCKET_COUNT;
@@ -143,5 +143,12 @@ export function aggregateData(
     bucket.weatherCode = getMostCommonWeatherCode(raw.weatherCodes);
   }
 
-  return { buckets, facilities, facilityTypes: facilityTypeMap };
+  // Calculate the last data timestamp
+  let lastDataTimestamp: Date | null = null;
+  if (filteredData.length > 0) {
+    const timestamps = filteredData.map(p => new Date(p.timestamp).getTime());
+    lastDataTimestamp = new Date(Math.max(...timestamps));
+  }
+
+  return { buckets, facilities, facilityTypes: facilityTypeMap, lastDataTimestamp };
 }

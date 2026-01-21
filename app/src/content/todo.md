@@ -15,5 +15,5 @@ Keine bekannt.
 
 ## Historie des Projektes
 
-* 2026-01-18: Projektstart und Go-Live
-* 2026-01-20: UI für Handies und Datenkonsitenz gefixt
+* 2026-01-18: Projektstart und Go-Live.
+* 2026-01-20: UI verfeinert und für Handies und Datenkonsitenz gefixt.

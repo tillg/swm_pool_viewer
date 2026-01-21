@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { theme } from '../styles/theme';
+import { Footer } from '../components/Footer';
 
 const POOL_IMAGES = [
   '/pool-1.jpg',
@@ -114,33 +115,6 @@ const Label = styled.strong`
   font-weight: 700;
 `;
 
-const Footer = styled.footer`
-  background: ${theme.colors.background.page};
-  padding: ${theme.spacing.xl} 0;
-  border-top: 1px solid ${theme.colors.border};
-`;
-
-const FooterContent = styled.div`
-  max-width: ${theme.layout.contentMaxWidth};
-  margin: 0 auto;
-  padding: 0 ${theme.spacing.xl};
-`;
-
-const FooterLink = styled(Link)`
-  color: #0065CC;
-  text-decoration: none;
-  font-size: 15px;
-  font-family: ${theme.typography.fontFamily.bold};
-  font-weight: 700;
-
-  &:hover {
-    text-decoration: underline;
-  }
-
-  &::after {
-    content: ' >>';
-  }
-`;
 
 export function Impressum() {
   const randomImage = useMemo(() => {
@@ -198,11 +172,7 @@ export function Impressum() {
         </Section>
       </ContentContainer>
 
-      <Footer>
-        <FooterContent>
-          <FooterLink to="/">Startseite</FooterLink>
-        </FooterContent>
-      </Footer>
+      <Footer />
     </PageWrapper>
   );
 }

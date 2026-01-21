@@ -37,11 +37,13 @@ const FooterLink = styled(Link)`
 `;
 
 const LinkContainer = styled.div`
-  display: flex;
-  gap: ${theme.spacing.l};
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: ${theme.spacing.l} 80px;
+  max-width: 500px;
 
   ${theme.mediaQueries.mobile} {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: ${theme.spacing.m};
   }
 `;
@@ -68,8 +70,9 @@ export function Footer() {
     <FooterContainer>
       <FooterContent>
         <LinkContainer>
-          <FooterLink to="/impressum">Impressum</FooterLink>
+          <FooterLink to="/">Startseite</FooterLink>
           <FooterLink to="/todo">Was noch kommt</FooterLink>
+          <FooterLink to="/impressum">Impressum</FooterLink>
         </LinkContainer>
         <BuildInfoRow>
           <span>Build {BUILD_NUMBER} vom {BUILD_DATE} (Deutsche Zeit)</span>

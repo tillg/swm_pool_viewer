@@ -131,9 +131,17 @@ const ErrorMessage = styled.div`
   text-align: center;
 `;
 
+const LastUpdateInfo = styled.div`
+  padding: ${theme.spacing.s} ${theme.spacing.m};
+  font-size: 12px;
+  color: ${theme.colors.text.muted};
+  text-align: right;
+  border-top: 1px solid ${theme.colors.border};
+`;
+
 const CHART_WIDTH = 1000;
 const CHART_HEIGHT = 400;
-const CHART_MARGIN = { top: 20, right: 20, bottom: 40, left: 50 };
+const CHART_MARGIN = { top: 20, right: 70, bottom: 40, left: 50 };
 
 function App() {
   const [rawData, setRawData] = useState<RawDataPoint[] | null>(null);
@@ -162,9 +170,9 @@ function App() {
   }, []);
 
   // Aggregate data based on time range
-  const { buckets, facilities, facilityTypes } = rawData
+  const { buckets, facilities, facilityTypes, lastDataTimestamp } = rawData
     ? aggregateData(rawData, timeRange)
-    : { buckets: [] as BucketData[], facilities: [] as string[], facilityTypes: new Map<string, string>() };
+    : { buckets: [] as BucketData[], facilities: [] as string[], facilityTypes: new Map<string, string>(), lastDataTimestamp: null as Date | null };
 
   // Initialize visibility when facilities change
   useEffect(() => {
@@ -258,6 +266,18 @@ function App() {
                   margin={CHART_MARGIN}
                 />
               </ChartScrollContainer>
+              {lastDataTimestamp && (
+                <LastUpdateInfo>
+                  Letzter Datenpunkt: {lastDataTimestamp.toLocaleString('de-DE', {
+                    weekday: 'short',
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })}
+                </LastUpdateInfo>
+              )}
             </ChartSection>
 
             <LegendSection>

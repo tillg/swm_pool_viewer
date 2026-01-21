@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 import { theme } from '../styles/theme';
+import { Footer } from '../components/Footer';
 import todoContent from '../content/todo.md';
 
 const POOL_IMAGES = [
@@ -117,35 +118,6 @@ const MarkdownContent = styled.div`
   }
 `;
 
-const Footer = styled.footer`
-  background: ${theme.colors.background.page};
-  padding: ${theme.spacing.xl} 0;
-  border-top: 1px solid ${theme.colors.border};
-`;
-
-const FooterContent = styled.div`
-  max-width: ${theme.layout.contentMaxWidth};
-  margin: 0 auto;
-  padding: 0 ${theme.spacing.xl};
-  display: flex;
-  gap: ${theme.spacing.l};
-`;
-
-const FooterLink = styled(Link)`
-  color: #0065CC;
-  text-decoration: none;
-  font-size: 15px;
-  font-family: ${theme.typography.fontFamily.bold};
-  font-weight: 700;
-
-  &:hover {
-    text-decoration: underline;
-  }
-
-  &::after {
-    content: ' >>';
-  }
-`;
 
 export function Todo() {
   const randomImage = useMemo(() => {
@@ -169,12 +141,7 @@ export function Todo() {
         </MarkdownContent>
       </ContentContainer>
 
-      <Footer>
-        <FooterContent>
-          <FooterLink to="/">Startseite</FooterLink>
-          <FooterLink to="/impressum">Impressum</FooterLink>
-        </FooterContent>
-      </Footer>
+      <Footer />
     </PageWrapper>
   );
 }
