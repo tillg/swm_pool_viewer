@@ -34,6 +34,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
+    fallback: {
+      buffer: require.resolve('buffer/'),
+    },
   },
   module: {
     rules: [
@@ -53,6 +56,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      Buffer: ['buffer', 'Buffer'],
+    }),
     new webpack.DefinePlugin({
       BUILD_NUMBER: JSON.stringify(getBuildNumber()),
       BUILD_DATE: JSON.stringify(getBuildDate()),

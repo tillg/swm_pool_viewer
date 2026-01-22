@@ -73,6 +73,8 @@ export function Footer() {
           <FooterLink to="/">Startseite</FooterLink>
           <FooterLink to="/todo">Was noch kommt</FooterLink>
           <FooterLink to="/impressum">Impressum</FooterLink>
+          <FooterLink to="/tech">Technischer Hintergrund</FooterLink>
+          <FooterLink to="/faq">FAQ</FooterLink>
         </LinkContainer>
         <BuildInfoRow>
           <span>Build {BUILD_NUMBER} vom {BUILD_DATE} (Deutsche Zeit)</span>

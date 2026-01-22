@@ -1,4 +1,10 @@
-Dies ist ein Hobby-Projekt, d.h. ich habe nur Abende und verregnete Wochenenden um daran zu arbeiten. Ich kann nicht zusagen, ob, oder welche Funktionen dazukommen. 
+---
+title: "Was noch kommt"
+heroImage: "random"
+showToc: false
+---
+
+Dies ist ein Hobby-Projekt, d.h. ich habe nur Abende und verregnete Wochenenden um daran zu arbeiten. Ich kann nicht zusagen, ob, oder welche Funktionen dazukommen.
 
 Dies ist mein eigener Notizzettel, was ich gerne noch machen würde.
 
