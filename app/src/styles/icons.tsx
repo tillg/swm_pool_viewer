@@ -47,7 +47,7 @@ export const SaunaIcon: React.FC<IconProps> = ({ size = 24, color = 'currentColo
 );
 
 /**
- * Ice Skating icon
+ * Ice Skating icon (from SWM website)
  * Used for: Eislaufbahn (ice skating rink)
  */
 export const IceRinkIcon: React.FC<IconProps> = ({ size = 24, color = 'currentColor', className }) => (
@@ -61,7 +61,7 @@ export const IceRinkIcon: React.FC<IconProps> = ({ size = 24, color = 'currentCo
     role="img"
   >
     <g fill={color}>
-      <path d="M48 52H16c-1.1 0-2 .9-2 2s.9 2 2 2h32c1.1 0 2-.9 2-2s-.9-2-2-2zm2-4c0-2.2-1.8-4-4-4H18c-2.2 0-4 1.8-4 4h36zM42 12c-3.3 0-6 2.7-6 6v22h-8V18c0-3.3-2.7-6-6-6s-6 2.7-6 6v22h-2c-1.1 0-2 .9-2 2s.9 2 2 2h36c1.1 0 2-.9 2-2s-.9-2-2-2h-2V18c0-3.3-2.7-6-6-6zm-24 6c0-1.1.9-2 2-2s2 .9 2 2v22h-4V18zm20 22h-4V18c0-1.1.9-2 2-2s2 .9 2 2v22z" />
+      <path d="M24 1h8a3 3 0 0 1 3 3v12c0 7 1 9 3 11v1h1l6 2h3c7 1 12 7 12 12-1 4-2 6-5 9l-9 1v6h6l3-1c2-1 3-2 3-5a2 2 0 0 1 3-2 2 2 0 0 1 2 2c0 5-2 8-6 10a12 12 0 0 1-3 1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-3h6v-8l1-1H7a4 4 0 0 1-4-2l1-13a44 44 0 0 0 1-11v-6c1-4 2-7 5-8a12 12 0 0 1 4-2c1-3 5-5 10-6zM14 50v8h27v-6l-3-1h-5l-1-1H19a414 414 0 0 0-5 0zM29 6h-4c-4 1-6 2-6 4a2 2 0 0 1-3 2 8 8 0 0 0-1 0 7 7 0 0 0-2 1c-2 1-3 2-3 5v13a49 49 0 0 1-1 4v1l-1 9h13l11 1h6c8 2 12 2 14 0 2-1 3-2 3-4l-2-4-5-3h-2v3a2 2 0 0 1-5-1v-2l-2-1-2 2a2 2 0 0 1-4-3l2-2-1-1v-1l-3 2a2 2 0 1 1-2-4l2-2a16 16 0 0 1-1-2h-2a2 2 0 0 1-1-4l3-1v-3l-2 1a2 2 0 1 1-1-5l3-1V6z" />
     </g>
   </svg>
 );
