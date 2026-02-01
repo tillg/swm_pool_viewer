@@ -1,6 +1,6 @@
 export interface RawDataPoint {
   timestamp: string;
-  pool_name: string;
+  facility_name: string;
   facility_type: string;
   occupancy_percent: number;
   is_open: number;

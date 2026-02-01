@@ -1,7 +1,7 @@
 import Papa from 'papaparse';
 import { RawDataPoint } from '../types';
 
-const CSV_URL = 'https://raw.githubusercontent.com/tillg/swm_pool_data/refs/heads/main/datasets/occupancy_features.csv';
+const CSV_URL = 'https://raw.githubusercontent.com/tillg/swm_pool_data/refs/heads/main/datasets/occupancy_historical.csv';
 
 export async function fetchOccupancyData(): Promise<RawDataPoint[]> {
   const response = await fetch(CSV_URL);

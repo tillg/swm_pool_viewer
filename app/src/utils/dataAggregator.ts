@@ -55,9 +55,9 @@ export function aggregateData(
   const facilitiesSet = new Set<string>();
   const facilityTypeMap = new Map<string, string>();
   filteredData.forEach(point => {
-    facilitiesSet.add(point.pool_name);
-    if (!facilityTypeMap.has(point.pool_name)) {
-      facilityTypeMap.set(point.pool_name, point.facility_type);
+    facilitiesSet.add(point.facility_name);
+    if (!facilityTypeMap.has(point.facility_name)) {
+      facilityTypeMap.set(point.facility_name, point.facility_type);
     }
   });
   const facilities = Array.from(facilitiesSet).sort();
@@ -104,10 +104,10 @@ export function aggregateData(
       // Occupancy per facility
       // Invert the value: data shows "available capacity", we want "occupancy"
       const occupancy = 100 - point.occupancy_percent;
-      if (!bucket.occupancies.has(point.pool_name)) {
-        bucket.occupancies.set(point.pool_name, []);
+      if (!bucket.occupancies.has(point.facility_name)) {
+        bucket.occupancies.set(point.facility_name, []);
       }
-      bucket.occupancies.get(point.pool_name)!.push(occupancy);
+      bucket.occupancies.get(point.facility_name)!.push(occupancy);
 
       // Weather data
       if (point.temperature_c != null) {
