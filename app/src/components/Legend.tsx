@@ -194,6 +194,43 @@ function getGroupIcon(groupKey: string) {
 
 const GROUP_ORDER = ['pool', 'sauna', 'ice', 'other'];
 
+const LineTypeIndicator = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${theme.spacing.m};
+  padding: ${theme.spacing.m} ${theme.spacing.s};
+  margin-top: ${theme.spacing.m};
+  border-top: 1px solid ${theme.colors.border};
+  font-size: 11px;
+  color: ${theme.colors.text.secondary};
+`;
+
+const LineTypeSample = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+`;
+
+const SolidLine = styled.span`
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background: ${theme.colors.text.secondary};
+`;
+
+const DashedLine = styled.span`
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    ${theme.colors.text.secondary} 0px,
+    ${theme.colors.text.secondary} 4px,
+    transparent 4px,
+    transparent 7px
+  );
+`;
+
 export function Legend({ facilities, facilityTypes, colorMap, visibility, onToggle, onToggleGroup }: LegendProps) {
   // Group facilities by type
   const grouped = new Map<string, string[]>();
@@ -257,6 +294,16 @@ export function Legend({ facilities, facilityTypes, colorMap, visibility, onTogg
             </div>
           );
         })}
+        <LineTypeIndicator>
+          <LineTypeSample>
+            <SolidLine />
+            <span>Historisch</span>
+          </LineTypeSample>
+          <LineTypeSample>
+            <DashedLine />
+            <span>Prognose</span>
+          </LineTypeSample>
+        </LineTypeIndicator>
       </LegendScroller>
       <ScrollTrack />
     </LegendContainer>

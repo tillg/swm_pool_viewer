@@ -1,10 +1,11 @@
 import Papa from 'papaparse';
 import { RawDataPoint } from '../types';
 
-const CSV_URL = 'https://raw.githubusercontent.com/tillg/swm_pool_data/refs/heads/main/datasets/occupancy_historical.csv';
+const HISTORICAL_URL = 'https://raw.githubusercontent.com/tillg/swm_pool_data/refs/heads/main/datasets/occupancy_historical.csv';
+const FORECAST_URL = 'https://raw.githubusercontent.com/tillg/swm_pool_data/refs/heads/main/datasets/occupancy_forecast.csv';
 
-export async function fetchOccupancyData(): Promise<RawDataPoint[]> {
-  const response = await fetch(CSV_URL);
+async function fetchCsv(url: string): Promise<RawDataPoint[]> {
+  const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
   }
@@ -27,4 +28,13 @@ export async function fetchOccupancyData(): Promise<RawDataPoint[]> {
       }
     });
   });
+}
+
+export async function fetchOccupancyData(): Promise<RawDataPoint[]> {
+  const [historical, forecast] = await Promise.all([
+    fetchCsv(HISTORICAL_URL),
+    fetchCsv(FORECAST_URL)
+  ]);
+
+  return [...historical, ...forecast];
 }

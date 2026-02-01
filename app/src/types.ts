@@ -3,7 +3,7 @@ export interface RawDataPoint {
   facility_name: string;
   facility_type: string;
   occupancy_percent: number;
-  is_open: number;
+  is_open: number | null;
   hour: number;
   day_of_week: number;
   month: number;
@@ -14,6 +14,7 @@ export interface RawDataPoint {
   precipitation_mm: number;
   weather_code: number;
   cloud_cover_percent: number;
+  data_source: 'historical' | 'forecast';
 }
 
 export interface BucketData {
@@ -24,6 +25,7 @@ export interface BucketData {
   avgTemperature: number;
   avgPrecipitation: number;
   weatherCode: number; // most common weather code in bucket
+  isForecast: boolean;
 }
 
 export type TimeRange = 'week' | '2days';

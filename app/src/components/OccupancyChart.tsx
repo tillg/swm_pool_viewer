@@ -134,6 +134,33 @@ export function OccupancyChart({
       .attr('stroke-dasharray', '4,4')
       .attr('opacity', 0.7);
 
+    // Draw "Now" marker
+    const now = new Date();
+    if (now >= startTime && now <= endTime) {
+      const nowX = xScale(now);
+
+      // Vertical line
+      g.append('line')
+        .attr('class', 'now-marker')
+        .attr('x1', nowX)
+        .attr('x2', nowX)
+        .attr('y1', 0)
+        .attr('y2', innerHeight)
+        .attr('stroke', '#ef4444')
+        .attr('stroke-width', 2);
+
+      // Label
+      g.append('text')
+        .attr('class', 'now-label')
+        .attr('x', nowX)
+        .attr('y', -5)
+        .attr('text-anchor', 'middle')
+        .attr('fill', '#ef4444')
+        .attr('font-size', '11px')
+        .attr('font-weight', 'bold')
+        .text('Jetzt');
+    }
+
     // X axis - use bucket end times as ticks to show actual data boundaries
     // Pick evenly spaced bucket end times, always including the last one
     const numTicks = 6;
@@ -231,25 +258,49 @@ export function OccupancyChart({
       if (!visibility.get(facility)) return;
 
       const color = colorMap.get(facility) || '#999';
-      const lineData: { time: Date; value: number }[] = [];
+
+      // Build data points with forecast info
+      const allData: { time: Date; value: number; isForecast: boolean }[] = [];
 
       buckets.forEach(bucket => {
         const value = bucket.facilities.get(facility);
         if (value != null) {
-          // Use bucket midpoint for x position
           const midTime = new Date(
             (bucket.startTime.getTime() + bucket.endTime.getTime()) / 2
           );
-          lineData.push({ time: midTime, value });
+          allData.push({ time: midTime, value, isForecast: bucket.isForecast });
         }
       });
 
-      if (lineData.length > 0) {
+      if (allData.length === 0) return;
+
+      // Split into historical and forecast segments
+      const historicalData = allData.filter(d => !d.isForecast);
+      const forecastData = allData.filter(d => d.isForecast);
+
+      // Draw historical line (solid)
+      if (historicalData.length > 0) {
         g.append('path')
-          .datum(lineData)
+          .datum(historicalData)
           .attr('fill', 'none')
           .attr('stroke', color)
           .attr('stroke-width', 2)
+          .attr('d', line);
+      }
+
+      // Draw forecast line (dashed)
+      if (forecastData.length > 0) {
+        // If there's historical data, connect the lines by prepending the last historical point
+        const forecastLineData = historicalData.length > 0
+          ? [historicalData[historicalData.length - 1], ...forecastData]
+          : forecastData;
+
+        g.append('path')
+          .datum(forecastLineData)
+          .attr('fill', 'none')
+          .attr('stroke', color)
+          .attr('stroke-width', 2)
+          .attr('stroke-dasharray', '6,4')
           .attr('d', line);
       }
     });
