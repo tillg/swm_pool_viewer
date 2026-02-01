@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import { RawDataPoint, BucketData, TimeRange } from './types';
 import { fetchOccupancyData } from './utils/dataFetcher';
@@ -143,11 +143,31 @@ const CHART_WIDTH = 1000;
 const CHART_HEIGHT = 400;
 const CHART_MARGIN = { top: 20, right: 70, bottom: 40, left: 50 };
 
+const STORAGE_KEY = 'swm-pool-viewer-state';
+
+interface SavedState {
+  timeRange?: TimeRange;
+  visibility?: Record<string, boolean>;
+}
+
+function loadSavedState(): SavedState {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      return JSON.parse(saved);
+    }
+  } catch (e) {
+    console.warn('Failed to load saved state:', e);
+  }
+  return {};
+}
+
 function App() {
+  const savedStateRef = useRef(loadSavedState());
   const [rawData, setRawData] = useState<RawDataPoint[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [timeRange, setTimeRange] = useState<TimeRange>('week');
+  const [timeRange, setTimeRange] = useState<TimeRange>(savedStateRef.current.timeRange ?? 'week');
   const [visibility, setVisibility] = useState<Map<string, boolean>>(new Map());
 
   // Fetch data on mount
@@ -174,14 +194,32 @@ function App() {
     ? aggregateData(rawData, timeRange)
     : { buckets: [] as BucketData[], facilities: [] as string[], facilityTypes: new Map<string, string>(), lastDataTimestamp: null as Date | null };
 
-  // Initialize visibility when facilities change
+  // Initialize visibility when facilities change, merging with saved state
   useEffect(() => {
     if (facilities.length > 0 && visibility.size === 0) {
       const initialVisibility = new Map<string, boolean>();
-      facilities.forEach(f => initialVisibility.set(f, true));
+      const savedVisibility = savedStateRef.current.visibility ?? {};
+      facilities.forEach(f => {
+        // Use saved value if exists, otherwise default to visible
+        initialVisibility.set(f, savedVisibility[f] ?? true);
+      });
       setVisibility(initialVisibility);
     }
   }, [facilities, visibility.size]);
+
+  // Persist state to localStorage
+  useEffect(() => {
+    if (visibility.size === 0) return; // Don't save until initialized
+    const state: SavedState = {
+      timeRange,
+      visibility: Object.fromEntries(visibility),
+    };
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {
+      console.warn('Failed to save state:', e);
+    }
+  }, [timeRange, visibility]);
 
   const colorMap = createColorMap(facilities);
 
