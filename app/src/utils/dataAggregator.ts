@@ -67,8 +67,6 @@ export function aggregateData(
   data: RawDataPoint[],
   timeRange: TimeRange
 ): { buckets: BucketData[]; facilities: string[]; facilityTypes: Map<string, string>; lastDataTimestamp: Date | null } {
-  const now = new Date();
-
   // Separate historical and forecast data
   const historicalData = data.filter(p => p.data_source === 'historical');
   const forecastData = data.filter(p => p.data_source === 'forecast');
@@ -91,7 +89,20 @@ export function aggregateData(
     return timestamp >= start && timestamp <= end;
   });
 
-  const filteredData = [...filteredHistorical, ...filteredForecast];
+  // Deduplicate: for each (facility, timestamp) pair, historical takes precedence over forecast
+  const dataPointMap = new Map<string, RawDataPoint>();
+
+  // Add forecast first, then historical overwrites
+  for (const point of filteredForecast) {
+    const key = `${getFacilityId(point.facility_name, point.facility_type)}|${point.timestamp}`;
+    dataPointMap.set(key, point);
+  }
+  for (const point of filteredHistorical) {
+    const key = `${getFacilityId(point.facility_name, point.facility_type)}|${point.timestamp}`;
+    dataPointMap.set(key, point);  // Overwrites forecast if exists
+  }
+
+  const filteredData = Array.from(dataPointMap.values());
 
   // Get unique facilities (using name|type as unique identifier) and map to display names
   const facilityIdToDisplay = new Map<string, string>();
@@ -111,7 +122,6 @@ export function aggregateData(
   for (let i = 0; i < BUCKET_COUNT; i++) {
     const bucketStart = new Date(start.getTime() + i * bucketSize);
     const bucketEnd = new Date(start.getTime() + (i + 1) * bucketSize);
-    const bucketMid = new Date((bucketStart.getTime() + bucketEnd.getTime()) / 2);
     buckets.push({
       bucketIndex: i,
       startTime: bucketStart,
@@ -120,7 +130,7 @@ export function aggregateData(
       avgTemperature: 0,
       avgPrecipitation: 0,
       weatherCode: 0,
-      isForecast: bucketMid > now
+      isForecast: false  // Will be set based on actual data content
     });
   }
 
@@ -130,11 +140,13 @@ export function aggregateData(
     temperatures: number[];
     precipitations: number[];
     weatherCodes: number[];
+    hasForecast: boolean;
   }> = buckets.map(() => ({
     occupancies: new Map(),
     temperatures: [],
     precipitations: [],
-    weatherCodes: []
+    weatherCodes: [],
+    hasForecast: false
   }));
 
   for (const point of filteredData) {
@@ -152,10 +164,16 @@ export function aggregateData(
       const occupancy = 100 - point.occupancy_percent;
       const facilityId = getFacilityId(point.facility_name, point.facility_type);
       const displayName = facilityIdToDisplay.get(facilityId)!;
+
       if (!bucket.occupancies.has(displayName)) {
         bucket.occupancies.set(displayName, []);
       }
       bucket.occupancies.get(displayName)!.push(occupancy);
+
+      // Track if bucket contains any forecast data
+      if (point.data_source === 'forecast') {
+        bucket.hasForecast = true;
+      }
 
       // Weather data
       if (point.temperature_c != null) {
@@ -180,6 +198,9 @@ export function aggregateData(
       const avg = values.reduce((a, b) => a + b, 0) / values.length;
       bucket.facilities.set(facility, avg);
     }
+
+    // Bucket is forecast if it contains any forecast data
+    bucket.isForecast = raw.hasForecast;
 
     // Average weather
     if (raw.temperatures.length > 0) {
