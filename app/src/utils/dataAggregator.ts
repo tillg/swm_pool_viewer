@@ -2,15 +2,43 @@ import { RawDataPoint, BucketData, TimeRange } from '../types';
 
 const BUCKET_COUNT = 24;
 
-function getTimeRange(range: TimeRange): { start: Date; end: Date } {
+// Create a unique facility ID from name and type
+function getFacilityId(name: string, type: string): string {
+  return `${name}|${type}`;
+}
+
+// Get display name for a facility - shows type suffix only for non-pool facilities
+function getDisplayName(name: string, type: string): string {
+  switch (type?.toLowerCase()) {
+    case 'sauna':
+      return `${name} (Sauna)`;
+    case 'ice_rink':
+    case 'eislauf':
+    case 'eislaufbahn':
+      return name; // Ice rinks typically have unique names
+    default:
+      return name; // Pools keep their original name
+  }
+}
+
+function getTimeRange(range: TimeRange, forecastData: RawDataPoint[]): { start: Date; end: Date } {
   const now = new Date();
-  const end = now;
   const start = new Date(now);
 
   if (range === 'week') {
     start.setDate(start.getDate() - 7);
   } else {
     start.setDate(start.getDate() - 2);
+  }
+
+  // End is the max of now or the latest forecast timestamp
+  let end = now;
+  if (forecastData.length > 0) {
+    const forecastTimestamps = forecastData.map(p => new Date(p.timestamp).getTime());
+    const maxForecast = new Date(Math.max(...forecastTimestamps));
+    if (maxForecast > end) {
+      end = maxForecast;
+    }
   }
 
   return { start, end };
@@ -39,34 +67,51 @@ export function aggregateData(
   data: RawDataPoint[],
   timeRange: TimeRange
 ): { buckets: BucketData[]; facilities: string[]; facilityTypes: Map<string, string>; lastDataTimestamp: Date | null } {
-  const { start, end } = getTimeRange(timeRange);
+  const now = new Date();
+
+  // Separate historical and forecast data
+  const historicalData = data.filter(p => p.data_source === 'historical');
+  const forecastData = data.filter(p => p.data_source === 'forecast');
+
+  const { start, end } = getTimeRange(timeRange, forecastData);
   const timeSpan = end.getTime() - start.getTime();
   const bucketSize = timeSpan / BUCKET_COUNT;
 
-  // Filter data to time range and only include open facilities
-  const filteredData = data.filter(point => {
+  // Filter historical data: apply time range and is_open filter
+  const filteredHistorical = historicalData.filter(point => {
     const timestamp = new Date(point.timestamp);
     const inRange = timestamp >= start && timestamp <= end;
     const isOpen = point.is_open === 1;
     return inRange && isOpen;
   });
 
-  // Get unique facilities and their types
-  const facilitiesSet = new Set<string>();
+  // Filter forecast data: apply time range only (is_open is NULL for forecast)
+  const filteredForecast = forecastData.filter(point => {
+    const timestamp = new Date(point.timestamp);
+    return timestamp >= start && timestamp <= end;
+  });
+
+  const filteredData = [...filteredHistorical, ...filteredForecast];
+
+  // Get unique facilities (using name|type as unique identifier) and map to display names
+  const facilityIdToDisplay = new Map<string, string>();
   const facilityTypeMap = new Map<string, string>();
   filteredData.forEach(point => {
-    facilitiesSet.add(point.facility_name);
-    if (!facilityTypeMap.has(point.facility_name)) {
-      facilityTypeMap.set(point.facility_name, point.facility_type);
+    const facilityId = getFacilityId(point.facility_name, point.facility_type);
+    if (!facilityIdToDisplay.has(facilityId)) {
+      const displayName = getDisplayName(point.facility_name, point.facility_type);
+      facilityIdToDisplay.set(facilityId, displayName);
+      facilityTypeMap.set(displayName, point.facility_type);
     }
   });
-  const facilities = Array.from(facilitiesSet).sort();
+  const facilities = Array.from(facilityIdToDisplay.values()).sort();
 
   // Initialize buckets
   const buckets: BucketData[] = [];
   for (let i = 0; i < BUCKET_COUNT; i++) {
     const bucketStart = new Date(start.getTime() + i * bucketSize);
     const bucketEnd = new Date(start.getTime() + (i + 1) * bucketSize);
+    const bucketMid = new Date((bucketStart.getTime() + bucketEnd.getTime()) / 2);
     buckets.push({
       bucketIndex: i,
       startTime: bucketStart,
@@ -74,7 +119,8 @@ export function aggregateData(
       facilities: new Map(),
       avgTemperature: 0,
       avgPrecipitation: 0,
-      weatherCode: 0
+      weatherCode: 0,
+      isForecast: bucketMid > now
     });
   }
 
@@ -101,13 +147,15 @@ export function aggregateData(
     if (bucketIndex >= 0 && bucketIndex < BUCKET_COUNT) {
       const bucket = bucketData[bucketIndex];
 
-      // Occupancy per facility
+      // Occupancy per facility - use display name as key
       // Invert the value: data shows "available capacity", we want "occupancy"
       const occupancy = 100 - point.occupancy_percent;
-      if (!bucket.occupancies.has(point.facility_name)) {
-        bucket.occupancies.set(point.facility_name, []);
+      const facilityId = getFacilityId(point.facility_name, point.facility_type);
+      const displayName = facilityIdToDisplay.get(facilityId)!;
+      if (!bucket.occupancies.has(displayName)) {
+        bucket.occupancies.set(displayName, []);
       }
-      bucket.occupancies.get(point.facility_name)!.push(occupancy);
+      bucket.occupancies.get(displayName)!.push(occupancy);
 
       // Weather data
       if (point.temperature_c != null) {
@@ -143,10 +191,10 @@ export function aggregateData(
     bucket.weatherCode = getMostCommonWeatherCode(raw.weatherCodes);
   }
 
-  // Calculate the last data timestamp
+  // Calculate the last data timestamp (historical only)
   let lastDataTimestamp: Date | null = null;
-  if (filteredData.length > 0) {
-    const timestamps = filteredData.map(p => new Date(p.timestamp).getTime());
+  if (filteredHistorical.length > 0) {
+    const timestamps = filteredHistorical.map(p => new Date(p.timestamp).getTime());
     lastDataTimestamp = new Date(Math.max(...timestamps));
   }
 
