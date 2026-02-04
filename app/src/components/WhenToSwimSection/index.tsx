@@ -136,7 +136,7 @@ export function WhenToSwimSection({
   return (
     <Section>
       <SectionContent>
-        <SectionTitle>Wann schwimmen?</SectionTitle>
+        <SectionTitle>Wann und wo schwimmen/saunieren/eislaufen?</SectionTitle>
         <Header>
           <TimeSlotSelector value={selection} onChange={setSelection} />
         </Header>
