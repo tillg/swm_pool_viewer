@@ -19,60 +19,50 @@ One shared Legend component controls visibility for both the new table and the e
 
 Dropdown combining day + time-of-day (12 total options):
 
-| Slot | Hours | Columns |
-|------|-------|---------|
-| Früh morgens | 7-10h | 7-8, 8-9, 9-10 |
-| Vormittags | 9-12h | 9-10, 10-11, 11-12 |
-| Mittagszeit | 11-14h | 11-12, 12-13, 13-14 |
-| Nachmittags | 14-17h | 14-15, 15-16, 16-17 |
-| Abends | 16-19h | 16-17, 17-18, 18-19 |
-| Spät abends | 19-23h | 19-20, 20-21, 21-22, 22-23 |
+| Slot | Hours |
+|------|-------|
+| früh morgens | 7-10h |
+| vormittags | 9-12h |
+| mittags | 11-14h |
+| nachmittags | 14-17h |
+| abends | 16-19h |
+| spät abends | 19-23h |
 
-Combined with "heute" / "morgen".
+Combined with "Heute" / "Morgen".
 
-Past time slots (e.g., "Früh morgens heute" at 3pm) remain selectable and show historical data from that specific date.
+Default selection: current or next applicable time slot.
 
 ## Table Display
 
 - **Rows**: One per user-selected facility
 - **Columns**: 1-hour intervals within selected time slot
-- **Cells**: Occupancy percentage + horizontal progress bar
+- **Cells**: Horizontal progress bar + occupancy percentage
 
 ## Data Source
 
-Filter `fetchOccupancyData()` by the specific calendar date and hour range selected. For each cell, use:
+Filter `fetchOccupancyData()` by the specific calendar date and hour range. For each cell, use:
 
 1. Historical data if available (exact timestamp match)
 2. Forecast data as fallback
 3. "–" if no data
 
-Gray out cells only when historical data shows `is_open = false`. Forecast cells are never grayed out.
+Cells show "geschl." when facility is closed.
 
 ## Occupancy Gauge
 
-Horizontal progress bar:
+Horizontal progress bar with gradient fill based on occupancy:
 
-- Bar height: ~15px
-- Empty background: `#f5f5f5`
-- Colors by occupancy level:
-  - **Green** `#52AE32`: 0-50%
-  - **Yellow** `#FFC107`: 50-75%
-  - **Red** `#E53935`: 75-100%
-
-## Mobile
-
-Horizontal scroll for the table when columns don't fit.
+- **Green** (`#7CB342`): 0-33%
+- **Green→Yellow gradient**: 33-66%
+- **Green→Yellow→Orange gradient**: 66-100%
 
 ## Component Structure
 
-```text
-WhenToSwimSection/
-├── TimeSlotSelector.tsx    # Dropdown: day + time slot
-├── OccupancyTable.tsx      # Container mapping facilities → rows
-├── OccupancyRow.tsx        # Single facility row
-└── OccupancyCell.tsx       # Cell with gauge + percentage
 ```
-
-## Open Items
-
-- Verify yellow/red thresholds match user expectations (SWM's exact values not publicly documented)
+WhenToSwimSection/
+├── index.tsx              # Main section with layout
+├── TimeSlotSelector.tsx   # Dropdown: day + time slot
+├── OccupancyTable.tsx     # Container mapping facilities → rows
+├── OccupancyRow.tsx       # Single facility row
+└── OccupancyCell.tsx      # Cell with gauge + percentage
+```
