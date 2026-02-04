@@ -2,30 +2,11 @@ import styled from 'styled-components';
 import { theme } from '../styles/theme';
 import { PoolIcon, SaunaIcon, IceRinkIcon, OtherIcon } from '../styles/icons';
 
-const ScrollTrack = styled.div`
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 6px;
-  background: ${theme.colors.border};
-  border-radius: 3px;
-`;
-
 const LegendScroller = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: ${theme.spacing.s} 0;
-  padding-right: 12px;
-  max-height: 400px;
-  overflow-y: auto;
-
-  /* Hide native scrollbar */
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  gap: 2px;
+  padding: ${theme.spacing.xs} 0;
 `;
 
 const LegendContainer = styled.div`
@@ -37,12 +18,11 @@ const GroupHeader = styled.label`
   align-items: center;
   gap: ${theme.spacing.s};
   cursor: pointer;
-  font-size: 13px;
-  font-weight: 600;
-  padding: ${theme.spacing.xs} ${theme.spacing.s};
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 8px;
   margin-top: ${theme.spacing.s};
-  border-radius: ${theme.borderRadius.small};
-  background: ${theme.colors.background.light};
+  border-radius: 4px;
   transition: background 0.2s ease;
 
   &:first-child {
@@ -50,7 +30,7 @@ const GroupHeader = styled.label`
   }
 
   &:hover {
-    background: ${theme.colors.border};
+    background: rgba(0, 0, 0, 0.04);
   }
 
   ${theme.mediaQueries.mobile} {
@@ -71,14 +51,14 @@ const LegendItem = styled.label`
   align-items: center;
   gap: ${theme.spacing.s};
   cursor: pointer;
-  font-size: 13px;
-  padding: ${theme.spacing.xs} ${theme.spacing.s};
-  padding-left: ${theme.spacing.l};
-  border-radius: ${theme.borderRadius.small};
+  font-size: 14px;
+  font-weight: 500;
+  padding: 4px 8px 4px 24px;
+  border-radius: 4px;
   transition: background 0.2s ease;
 
   &:hover {
-    background: ${theme.colors.background.light};
+    background: rgba(0, 0, 0, 0.04);
   }
 
   ${theme.mediaQueries.mobile} {
@@ -194,43 +174,6 @@ function getGroupIcon(groupKey: string) {
 
 const GROUP_ORDER = ['pool', 'sauna', 'ice', 'other'];
 
-const LineTypeIndicator = styled.div`
-  display: flex;
-  align-items: center;
-  gap: ${theme.spacing.m};
-  padding: ${theme.spacing.m} ${theme.spacing.s};
-  margin-top: ${theme.spacing.m};
-  border-top: 1px solid ${theme.colors.border};
-  font-size: 11px;
-  color: ${theme.colors.text.secondary};
-`;
-
-const LineTypeSample = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 6px;
-`;
-
-const SolidLine = styled.span`
-  display: inline-block;
-  width: 20px;
-  height: 2px;
-  background: ${theme.colors.text.secondary};
-`;
-
-const DashedLine = styled.span`
-  display: inline-block;
-  width: 20px;
-  height: 2px;
-  background: repeating-linear-gradient(
-    to right,
-    ${theme.colors.text.secondary} 0px,
-    ${theme.colors.text.secondary} 4px,
-    transparent 4px,
-    transparent 7px
-  );
-`;
-
 export function Legend({ facilities, facilityTypes, colorMap, visibility, onToggle, onToggleGroup }: LegendProps) {
   // Group facilities by type
   const grouped = new Map<string, string[]>();
@@ -294,18 +237,7 @@ export function Legend({ facilities, facilityTypes, colorMap, visibility, onTogg
             </div>
           );
         })}
-        <LineTypeIndicator>
-          <LineTypeSample>
-            <SolidLine />
-            <span>Historisch</span>
-          </LineTypeSample>
-          <LineTypeSample>
-            <DashedLine />
-            <span>Prognose</span>
-          </LineTypeSample>
-        </LineTypeIndicator>
       </LegendScroller>
-      <ScrollTrack />
     </LegendContainer>
   );
 }

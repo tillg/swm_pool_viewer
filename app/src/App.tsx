@@ -8,10 +8,11 @@ import { theme } from './styles/theme';
 import { Hero } from './components/Hero';
 import { Spinner } from './components/Spinner';
 import { TimeRangeToggle } from './components/TimeRangeToggle';
-import { Legend } from './components/Legend';
 import { WeatherHeader } from './components/WeatherHeader';
 import { OccupancyChart } from './components/OccupancyChart';
 import { Footer } from './components/Footer';
+import { WhenToSwimSection } from './components/WhenToSwimSection';
+import { TimeSlotSelection } from './components/WhenToSwimSection/TimeSlotSelector';
 
 const PageWrapper = styled.div`
   min-height: 100vh;
@@ -73,18 +74,7 @@ const Header = styled.div`
   gap: ${theme.spacing.xl};
 `;
 
-const MainContent = styled.div`
-  display: flex;
-  gap: ${theme.spacing.xl};
-
-  ${theme.mediaQueries.mobile} {
-    flex-direction: column;
-  }
-`;
-
 const ChartSection = styled.div`
-  flex: 1;
-  min-width: 0;
   background: ${theme.colors.background.page};
   border: 1px solid ${theme.colors.border};
   border-radius: ${theme.borderRadius.large};
@@ -102,26 +92,6 @@ const ChartScrollContainer = styled.div`
   }
 `;
 
-const LegendSection = styled.div`
-  width: 280px;
-  flex-shrink: 0;
-  background: ${theme.colors.background.page};
-  border: 1px solid ${theme.colors.border};
-  border-radius: ${theme.borderRadius.large};
-  padding: ${theme.spacing.s} ${theme.spacing.s} ${theme.spacing.s} ${theme.spacing.s};
-
-  ${theme.mediaQueries.mobile} {
-    width: 100%;
-  }
-`;
-
-const LegendTitle = styled.h3`
-  margin: 0 0 ${theme.spacing.s} 0;
-  font-size: ${theme.typography.fontSize.bodySmall};
-  color: ${theme.colors.text.secondary};
-  font-weight: 500;
-`;
-
 const ErrorMessage = styled.div`
   padding: ${theme.spacing.xl};
   background: ${theme.colors.alert.background};
@@ -131,12 +101,52 @@ const ErrorMessage = styled.div`
   text-align: center;
 `;
 
-const LastUpdateInfo = styled.div`
+const ChartFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: ${theme.spacing.s} ${theme.spacing.m};
   font-size: 12px;
   color: ${theme.colors.text.muted};
-  text-align: right;
   border-top: 1px solid ${theme.colors.border};
+
+  ${theme.mediaQueries.mobile} {
+    flex-direction: column;
+    gap: ${theme.spacing.s};
+    align-items: flex-start;
+  }
+`;
+
+const LineTypeLegend = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${theme.spacing.m};
+`;
+
+const LineTypeSample = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+`;
+
+const SolidLine = styled.span`
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background: ${theme.colors.text.secondary};
+`;
+
+const DashedLine = styled.span`
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    ${theme.colors.text.secondary} 0px,
+    ${theme.colors.text.secondary} 4px,
+    transparent 4px,
+    transparent 7px
+  );
 `;
 
 const CHART_WIDTH = 1000;
@@ -148,6 +158,7 @@ const STORAGE_KEY = 'swm-pool-viewer-state';
 interface SavedState {
   timeRange?: TimeRange;
   visibility?: Record<string, boolean>;
+  swimTimeSelection?: TimeSlotSelection;
 }
 
 function loadSavedState(): SavedState {
@@ -169,6 +180,9 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [timeRange, setTimeRange] = useState<TimeRange>(savedStateRef.current.timeRange ?? 'week');
   const [visibility, setVisibility] = useState<Map<string, boolean>>(new Map());
+  const [swimTimeSelection, setSwimTimeSelection] = useState<TimeSlotSelection | undefined>(
+    savedStateRef.current.swimTimeSelection
+  );
 
   // Fetch data on mount
   useEffect(() => {
@@ -213,13 +227,14 @@ function App() {
     const state: SavedState = {
       timeRange,
       visibility: Object.fromEntries(visibility),
+      swimTimeSelection,
     };
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch (e) {
       console.warn('Failed to save state:', e);
     }
-  }, [timeRange, visibility]);
+  }, [timeRange, visibility, swimTimeSelection]);
 
   const colorMap = createColorMap(facilities);
 
@@ -278,6 +293,18 @@ function App() {
         </IntroText>
       </ContentContainer>
 
+      <WhenToSwimSection
+        rawData={rawData!}
+        facilities={facilities}
+        facilityTypes={facilityTypes}
+        colorMap={colorMap}
+        visibility={visibility}
+        onToggle={handleToggleVisibility}
+        onToggleGroup={handleToggleGroup}
+        swimTimeSelection={swimTimeSelection}
+        onSwimTimeChange={setSwimTimeSelection}
+      />
+
       <BlueSection>
         <BlueSectionContent>
           <SectionTitle>Auslastung-Historie</SectionTitle>
@@ -286,26 +313,36 @@ function App() {
             <TimeRangeToggle value={timeRange} onChange={setTimeRange} />
           </Header>
 
-          <MainContent>
-            <ChartSection>
-              <ChartScrollContainer>
-                <WeatherHeader
-                  buckets={buckets}
-                  leftMargin={CHART_MARGIN.left}
-                  rightMargin={CHART_MARGIN.right}
-                />
-                <OccupancyChart
-                  buckets={buckets}
-                  facilities={facilities}
-                  colorMap={colorMap}
-                  visibility={visibility}
-                  width={CHART_WIDTH}
-                  height={CHART_HEIGHT}
-                  margin={CHART_MARGIN}
-                />
-              </ChartScrollContainer>
+          <ChartSection>
+            <ChartScrollContainer>
+              <WeatherHeader
+                buckets={buckets}
+                leftMargin={CHART_MARGIN.left}
+                rightMargin={CHART_MARGIN.right}
+              />
+              <OccupancyChart
+                buckets={buckets}
+                facilities={facilities}
+                colorMap={colorMap}
+                visibility={visibility}
+                width={CHART_WIDTH}
+                height={CHART_HEIGHT}
+                margin={CHART_MARGIN}
+              />
+            </ChartScrollContainer>
+            <ChartFooter>
+              <LineTypeLegend>
+                <LineTypeSample>
+                  <SolidLine />
+                  <span>Historisch</span>
+                </LineTypeSample>
+                <LineTypeSample>
+                  <DashedLine />
+                  <span>Prognose</span>
+                </LineTypeSample>
+              </LineTypeLegend>
               {lastDataTimestamp && (
-                <LastUpdateInfo>
+                <span>
                   Letzter Datenpunkt: {lastDataTimestamp.toLocaleString('de-DE', {
                     weekday: 'short',
                     day: '2-digit',
@@ -314,22 +351,10 @@ function App() {
                     hour: '2-digit',
                     minute: '2-digit'
                   })}
-                </LastUpdateInfo>
+                </span>
               )}
-            </ChartSection>
-
-            <LegendSection>
-              <LegendTitle>Facilities</LegendTitle>
-              <Legend
-                facilities={facilities}
-                facilityTypes={facilityTypes}
-                colorMap={colorMap}
-                visibility={visibility}
-                onToggle={handleToggleVisibility}
-                onToggleGroup={handleToggleGroup}
-              />
-            </LegendSection>
-          </MainContent>
+            </ChartFooter>
+          </ChartSection>
         </BlueSectionContent>
       </BlueSection>
       <Footer />
