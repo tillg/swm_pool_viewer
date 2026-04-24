@@ -83,16 +83,23 @@ export function aggregateData(
     return inRange && isOpen;
   });
 
-  // Filter forecast data: apply time range and drop scheduled-closed rows.
-  // Since the opening-hours overlay, forecast rows carry is_open=0 with
-  // occupancy_percent=0 as a sentinel for closed hours. Letting them through
-  // turns the 100 - occupancy_percent inversion into a spurious 100%.
-  // is_open === null (facility missing from snapshot) still passes through.
+  // Anchor the forecast boundary at the most recent live scrape so the
+  // dashed segment begins right after "Jetzt" and doesn't swallow the
+  // bucket we already have 15-min historical data for.
+  const maxHistoricalTime = filteredHistorical.length > 0
+    ? Math.max(...filteredHistorical.map(p => new Date(p.timestamp).getTime()))
+    : 0;
+
+  // Filter forecast data: apply time range, drop scheduled-closed rows
+  // (is_open=0 sentinel from the opening-hours overlay), and drop any
+  // point already covered by a live historical scrape. is_open === null
+  // (facility missing from snapshot) still passes through.
   const filteredForecast = forecastData.filter(point => {
-    const timestamp = new Date(point.timestamp);
-    const inRange = timestamp >= start && timestamp <= end;
+    const timestamp = new Date(point.timestamp).getTime();
+    const inRange = timestamp >= start.getTime() && timestamp <= end.getTime();
     const notClosed = point.is_open !== 0;
-    return inRange && notClosed;
+    const afterHistorical = timestamp > maxHistoricalTime;
+    return inRange && notClosed && afterHistorical;
   });
 
   // Deduplicate: for each (facility, timestamp) pair, historical takes precedence over forecast

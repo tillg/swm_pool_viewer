@@ -86,6 +86,47 @@ schedule itself (no new "Öffnungszeiten" panel).
 - Historical takes precedence over forecast for a given hour (existing
   rule, unchanged).
 
+## Chart Historical/Forecast Boundary
+
+Even with closed-hour forecast rows filtered out, a secondary issue
+appears on the chart: the dashed segment starts noticeably earlier
+than `Jetzt` instead of right next to it.
+
+Root cause: the aggregator creates ~4-hour buckets, and each bucket is
+drawn dashed as soon as **any** forecast point lands in it
+(`bucket.hasForecast = true` on any forecast hit). Since the daily
+forecast is regenerated at 05:00 UTC = ~07:00 Berlin, today's forecast
+includes hourly points from 07:00 onward. The bucket containing `Jetzt`
+also contains those early forecast hours, so the entire bucket flips
+to dashed — even though it's mostly made of 15-minute historical
+scrapes.
+
+### Fix
+
+Drop forecast points whose timestamp is `<= max(historical.timestamp)`
+before bucketing. This both classifies the boundary bucket correctly
+(purely historical ⇒ solid) and removes stale model predictions from
+diluting the bucket average.
+
+```ts
+// dataAggregator.ts
+const maxHistoricalTime = filteredHistorical.length > 0
+  ? Math.max(...filteredHistorical.map(p => new Date(p.timestamp).getTime()))
+  : 0;
+
+const filteredForecast = forecastData.filter(point => {
+  const t = new Date(point.timestamp).getTime();
+  const inRange = t >= start.getTime() && t <= end.getTime();
+  const notClosed = point.is_open !== 0;
+  const afterHistorical = t > maxHistoricalTime;
+  return inRange && notClosed && afterHistorical;
+});
+```
+
+Result: the dashed segment begins at the first forecast point strictly
+after the most recent live scrape (≈ 0–15 minutes before `Jetzt` in
+practice).
+
 ## Non-Goals
 
 - No new UI surface for displaying the weekly opening-hours schedule.
