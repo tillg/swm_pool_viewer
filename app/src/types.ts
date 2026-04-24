@@ -3,6 +3,9 @@ export interface RawDataPoint {
   facility_name: string;
   facility_type: string;
   occupancy_percent: number;
+  // 1 = open, 0 = closed, null = unknown (facility missing from opening-hours
+  // snapshot). Populated for both historical and forecast rows since the
+  // opening-hours overlay landed upstream (2026-04).
   is_open: number | null;
   hour: number;
   day_of_week: number;

@@ -121,8 +121,9 @@ function getOccupancyData(
     if (facilityMap) {
       // Occupancy data is inverted in the raw data (shows available capacity)
       const occupancy = 100 - point.occupancy_percent;
-      // Only historical data has is_open field
-      const isClosed = point.data_source === 'historical' && point.is_open === 0;
+      // Since the opening-hours overlay, is_open is populated for forecast
+      // rows too (0 = scheduled closed). Historical rows unchanged.
+      const isClosed = point.is_open === 0;
       facilityMap.set(hour, { occupancy, isClosed });
     }
   }

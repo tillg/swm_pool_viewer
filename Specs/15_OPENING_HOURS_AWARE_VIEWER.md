@@ -1,0 +1,109 @@
+# Opening-Hours-Aware Viewer
+
+## Context
+
+The upstream `swm_pool_data` pipeline now applies a deterministic
+opening-hours overlay at forecast emit time (see
+[`Specs/changes/integrate-opening-hours/`](https://github.com/tillg/swm_pool_data/tree/main/Specs/changes/integrate-opening-hours)).
+As a result, `occupancy_forecast.csv` rows can carry:
+
+| `is_open` | `occupancy_percent` | Meaning |
+|-----------|---------------------|---------|
+| `1` | model prediction | Facility scheduled open, predicted free-capacity value. |
+| `0` | `0.0` | Facility scheduled closed — sentinel, **not** "100 % full". |
+| `NULL` | model prediction | Facility missing from the opening-hours snapshot; keep the raw prediction. |
+
+This supersedes the note in
+[`12_SHOW_FORECAST.md`](./12_SHOW_FORECAST.md) that `is_open` is always
+NULL in forecast data.
+
+## Problem
+
+The viewer was built on the old assumption. As of 2026-04-22 the forecast
+CSV started carrying `is_open = 0` with `occupancy_percent = 0` on closed
+hours. The viewer's occupancy inversion `100 - occupancy_percent` turns
+that sentinel into `100 %`, so:
+
+- **Chart (`OccupancyChart.tsx`)**: closed forecast hours appear as
+  straight lines at 100 % Auslastung. Visible today as a large spike to
+  100 % on the last forecast night (the rightmost bucket is almost
+  entirely closed hours, so averaging doesn't dilute it).
+- **WhenToSwim table (`OccupancyTable.tsx:125`)**: the existing "geschl."
+  rendering is gated on `data_source === 'historical'`, so forecast
+  closed cells render as `0 %` occupancy instead of "geschl."
+
+## Goal
+
+Make the viewer treat forecast `is_open === 0` the same way it already
+treats historical `is_open === 0`. Out of scope: surfacing the weekly
+schedule itself (no new "Öffnungszeiten" panel).
+
+## Files to Modify
+
+- **`app/src/utils/dataAggregator.ts`** — Extend the existing forecast
+  filter to also drop rows where `is_open === 0`, mirroring the
+  historical filter. Points with `is_open === null` continue to pass
+  through (unknown-facility fallback). After the filter runs, each
+  remaining forecast row has a real model prediction — the inversion is
+  correct and the chart shows a gap over closed hours instead of a
+  spike.
+
+- **`app/src/components/WhenToSwimSection/OccupancyTable.tsx`** — Change
+  the `isClosed` derivation so forecast rows count too:
+
+  ```ts
+  // before
+  const isClosed = point.data_source === 'historical' && point.is_open === 0;
+  // after
+  const isClosed = point.is_open === 0;
+  ```
+
+  Hours where the only available reading is a closed forecast will now
+  correctly display "geschl." rather than `0 %`.
+
+- **`app/src/types.ts`** — No schema change needed (`is_open` is already
+  `number | null`). Add or refresh the inline comment on `is_open` to
+  reflect the three-state contract.
+
+## Behavior After Change
+
+### Chart
+
+- Closed forecast hours contribute **no** data point. D3's
+  `line.defined()` handles gaps natively — the dashed line breaks over
+  closed hours instead of spiking.
+- Buckets that straddle the open/close boundary now average only over
+  open hours inside the bucket, which is the intended behavior.
+- No change to historical rendering.
+
+### WhenToSwim table
+
+- Forecast cell where `is_open === 0` → "geschl." (greyed out, same as
+  today's historical behavior).
+- Forecast cell where `is_open === 1` → gauge + model prediction.
+- Forecast cell where `is_open === null` (facility missing from
+  snapshot) → gauge + prediction, same as pre-overlay behavior.
+- Historical takes precedence over forecast for a given hour (existing
+  rule, unchanged).
+
+## Non-Goals
+
+- No new UI surface for displaying the weekly opening-hours schedule.
+- No change to historical data handling.
+- No change to the chart's 24-bucket aggregation scheme.
+- No mixed-bucket gap heuristic (e.g. "if more than half closed, drop
+  bucket"). Filtering at the point level before aggregation is enough.
+
+## Testing
+
+Manual:
+
+1. `cd app && npm start`, open <http://localhost:3000>.
+2. Confirm the chart no longer shows the 100 % spike at the end of the
+   forecast horizon.
+3. In WhenToSwim, pick "Morgen" / "früh morgens" for a pool and confirm
+   pre-opening hours read "geschl." rather than `0 %`.
+4. Save a before/after screenshot pair to `.tmp/`.
+
+Automated: none — the viewer has no unit tests today. Keep any follow-up
+test introduction out of scope for this change.

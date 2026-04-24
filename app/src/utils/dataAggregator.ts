@@ -83,10 +83,16 @@ export function aggregateData(
     return inRange && isOpen;
   });
 
-  // Filter forecast data: apply time range only (is_open is NULL for forecast)
+  // Filter forecast data: apply time range and drop scheduled-closed rows.
+  // Since the opening-hours overlay, forecast rows carry is_open=0 with
+  // occupancy_percent=0 as a sentinel for closed hours. Letting them through
+  // turns the 100 - occupancy_percent inversion into a spurious 100%.
+  // is_open === null (facility missing from snapshot) still passes through.
   const filteredForecast = forecastData.filter(point => {
     const timestamp = new Date(point.timestamp);
-    return timestamp >= start && timestamp <= end;
+    const inRange = timestamp >= start && timestamp <= end;
+    const notClosed = point.is_open !== 0;
+    return inRange && notClosed;
   });
 
   // Deduplicate: for each (facility, timestamp) pair, historical takes precedence over forecast
