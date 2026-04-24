@@ -140,6 +140,17 @@ Result: the dashed segment begins at the first bucket whose start time
 is strictly after the most recent live scrape — never earlier than
 `Jetzt`, regardless of bucket width.
 
+### Splice exactly at Jetzt
+
+Bucket classification still leaves the visible solid→dashed transition
+at a bucket midpoint, which can be several hours off from the `Jetzt`
+line — visible as a solid curve that runs past `Jetzt` before turning
+dashed. Fix it as a pure render concern in `OccupancyChart.tsx`: for
+each facility, if `now` falls between the last historical midpoint and
+the first forecast midpoint, insert a synthetic linearly-interpolated
+point at `now` and use it as both the last solid anchor and the first
+dashed anchor. The transition lands exactly on the `Jetzt` line.
+
 ## Non-Goals
 
 - No new UI surface for displaying the weekly opening-hours schedule.

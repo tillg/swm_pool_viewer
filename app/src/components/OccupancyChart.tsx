@@ -278,6 +278,25 @@ export function OccupancyChart({
       const historicalData = allData.filter(d => !d.isForecast);
       const forecastData = allData.filter(d => d.isForecast);
 
+      // Splice a synthetic point at exactly `now` so the solid→dashed
+      // transition lands on the "Jetzt" line visually, not at whichever
+      // bucket midpoint happens to be nearest.
+      if (
+        historicalData.length > 0 &&
+        forecastData.length > 0 &&
+        now > historicalData[historicalData.length - 1].time &&
+        now < forecastData[0].time
+      ) {
+        const last = historicalData[historicalData.length - 1];
+        const first = forecastData[0];
+        const span = first.time.getTime() - last.time.getTime();
+        const t = span > 0 ? (now.getTime() - last.time.getTime()) / span : 0;
+        const valueAtNow = last.value + (first.value - last.value) * t;
+        const nowPoint = { time: now, value: valueAtNow, isForecast: false };
+        historicalData.push(nowPoint);
+        forecastData.unshift({ ...nowPoint, isForecast: true });
+      }
+
       // Draw historical line (solid)
       if (historicalData.length > 0) {
         g.append('path')
@@ -290,13 +309,8 @@ export function OccupancyChart({
 
       // Draw forecast line (dashed)
       if (forecastData.length > 0) {
-        // If there's historical data, connect the lines by prepending the last historical point
-        const forecastLineData = historicalData.length > 0
-          ? [historicalData[historicalData.length - 1], ...forecastData]
-          : forecastData;
-
         g.append('path')
-          .datum(forecastLineData)
+          .datum(forecastData)
           .attr('fill', 'none')
           .attr('stroke', color)
           .attr('stroke-width', 2)
