@@ -153,13 +153,11 @@ export function aggregateData(
     temperatures: number[];
     precipitations: number[];
     weatherCodes: number[];
-    hasForecast: boolean;
   }> = buckets.map(() => ({
     occupancies: new Map(),
     temperatures: [],
     precipitations: [],
-    weatherCodes: [],
-    hasForecast: false
+    weatherCodes: []
   }));
 
   for (const point of filteredData) {
@@ -182,11 +180,6 @@ export function aggregateData(
         bucket.occupancies.set(displayName, []);
       }
       bucket.occupancies.get(displayName)!.push(occupancy);
-
-      // Track if bucket contains any forecast data
-      if (point.data_source === 'forecast') {
-        bucket.hasForecast = true;
-      }
 
       // Weather data
       if (point.temperature_c != null) {
@@ -212,8 +205,12 @@ export function aggregateData(
       bucket.facilities.set(facility, avg);
     }
 
-    // Bucket is forecast if it contains any forecast data
-    bucket.isForecast = raw.hasForecast;
+    // A bucket that starts before the most recent live scrape is drawn as
+    // historical even if a few forecast hours land in its tail. Without
+    // this, a wide weekly bucket straddling "Jetzt" would flip the whole
+    // region to dashed because ~3 forecast hours outvote ~20 live scrapes
+    // in hasForecast's OR logic.
+    bucket.isForecast = bucket.startTime.getTime() > maxHistoricalTime;
 
     // Average weather
     if (raw.temperatures.length > 0) {

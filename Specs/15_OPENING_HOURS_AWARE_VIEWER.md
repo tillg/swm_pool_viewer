@@ -103,10 +103,19 @@ scrapes.
 
 ### Fix
 
-Drop forecast points whose timestamp is `<= max(historical.timestamp)`
-before bucketing. This both classifies the boundary bucket correctly
-(purely historical ⇒ solid) and removes stale model predictions from
-diluting the bucket average.
+Two changes in `dataAggregator.ts`:
+
+1. **Drop forecast points whose timestamp is `<= max(historical.timestamp)`.**
+   Removes stale model predictions from the overlap region so they
+   can't pollute bucket averages.
+
+2. **Classify a bucket as forecast by its start time, not by its
+   contents.** A wide weekly bucket straddling `Jetzt` contains mostly
+   live 15-min scrapes plus a handful of future forecast hours. The
+   previous OR-based `hasForecast` flag let those few forecast points
+   flip the whole bucket to dashed. Switching to
+   `bucket.startTime > maxHistoricalTime` ties the boundary to actual
+   chronology.
 
 ```ts
 // dataAggregator.ts
@@ -121,11 +130,15 @@ const filteredForecast = forecastData.filter(point => {
   const afterHistorical = t > maxHistoricalTime;
   return inRange && notClosed && afterHistorical;
 });
+
+// ...
+
+bucket.isForecast = bucket.startTime.getTime() > maxHistoricalTime;
 ```
 
-Result: the dashed segment begins at the first forecast point strictly
-after the most recent live scrape (≈ 0–15 minutes before `Jetzt` in
-practice).
+Result: the dashed segment begins at the first bucket whose start time
+is strictly after the most recent live scrape — never earlier than
+`Jetzt`, regardless of bucket width.
 
 ## Non-Goals
 
