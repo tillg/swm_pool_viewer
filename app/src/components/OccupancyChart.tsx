@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import * as d3 from 'd3';
-import { BucketData } from '../types';
+import { BucketData, OpeningEvent } from '../types';
 import { theme } from '../styles/theme';
 
 const ChartContainer = styled.div`
@@ -19,6 +19,7 @@ interface OccupancyChartProps {
   facilities: string[];
   colorMap: Map<string, string>;
   visibility: Map<string, boolean>;
+  openingEvents: Map<string, OpeningEvent[]>;
   width: number;
   height: number;
   margin: { top: number; right: number; bottom: number; left: number };
@@ -29,6 +30,7 @@ export function OccupancyChart({
   facilities,
   colorMap,
   visibility,
+  openingEvents,
   width,
   height,
   margin
@@ -259,6 +261,25 @@ export function OccupancyChart({
 
       const color = colorMap.get(facility) || '#999';
 
+      // Build closed intervals from open/close events so we can drop bucket
+      // midpoints that would otherwise plot inside a closed period (only
+      // matters when a wide bucket straddles a close boundary).
+      const facilityEvents = openingEvents.get(facility) ?? [];
+      const sortedEvents = [...facilityEvents].sort(
+        (a, b) => a.time.getTime() - b.time.getTime()
+      );
+      const closedIntervals: { start: number; end: number }[] = [];
+      for (let i = 0; i < sortedEvents.length - 1; i++) {
+        if (sortedEvents[i].type === 'close' && sortedEvents[i + 1].type === 'open') {
+          closedIntervals.push({
+            start: sortedEvents[i].time.getTime(),
+            end: sortedEvents[i + 1].time.getTime(),
+          });
+        }
+      }
+      const isInsideClosed = (timeMs: number): boolean =>
+        closedIntervals.some(iv => timeMs > iv.start && timeMs < iv.end);
+
       // Build data points with forecast info
       const allData: { time: Date; value: number; isForecast: boolean }[] = [];
 
@@ -268,11 +289,13 @@ export function OccupancyChart({
           const midTime = new Date(
             (bucket.startTime.getTime() + bucket.endTime.getTime()) / 2
           );
-          allData.push({ time: midTime, value, isForecast: bucket.isForecast });
+          if (!isInsideClosed(midTime.getTime())) {
+            allData.push({ time: midTime, value, isForecast: bucket.isForecast });
+          }
         }
       });
 
-      if (allData.length === 0) return;
+      if (allData.length === 0 && facilityEvents.length === 0) return;
 
       // Split into historical and forecast segments
       const historicalData = allData.filter(d => !d.isForecast);
@@ -281,20 +304,71 @@ export function OccupancyChart({
       // Splice a synthetic point at exactly `now` so the solid→dashed
       // transition lands on the "Jetzt" line visually, not at whichever
       // bucket midpoint happens to be nearest.
-      if (
-        historicalData.length > 0 &&
-        forecastData.length > 0 &&
-        now > historicalData[historicalData.length - 1].time &&
-        now < forecastData[0].time
-      ) {
+      const nowMs = now.getTime();
+      if (historicalData.length > 0 && forecastData.length > 0) {
         const last = historicalData[historicalData.length - 1];
         const first = forecastData[0];
-        const span = first.time.getTime() - last.time.getTime();
-        const t = span > 0 ? (now.getTime() - last.time.getTime()) / span : 0;
-        const valueAtNow = last.value + (first.value - last.value) * t;
-        const nowPoint = { time: now, value: valueAtNow, isForecast: false };
-        historicalData.push(nowPoint);
-        forecastData.unshift({ ...nowPoint, isForecast: true });
+        const lastMs = last.time.getTime();
+        const firstMs = first.time.getTime();
+        if (nowMs > lastMs && nowMs < firstMs) {
+          const t = (nowMs - lastMs) / (firstMs - lastMs);
+          const valueAtNow = last.value + (first.value - last.value) * t;
+          const nowPoint = { time: now, value: valueAtNow, isForecast: false };
+          historicalData.push(nowPoint);
+          forecastData.unshift({ ...nowPoint, isForecast: true });
+        }
+      }
+
+      // Splice event anchors so the line meets the dot exactly. Open events
+      // anchor the start of a new open run; close events anchor the end.
+      // A NaN sentinel right after each close event breaks the d3 line
+      // during the closed gap. See architecture.md D5/D6.
+      const dotPositions: { time: Date; value: number; isForecast: boolean }[] = [];
+      for (const event of facilityEvents) {
+        const target = event.isForecast ? forecastData : historicalData;
+        const eventMs = event.time.getTime();
+
+        let before: { time: Date; value: number; isForecast: boolean } | null = null;
+        let after: { time: Date; value: number; isForecast: boolean } | null = null;
+        for (const point of target) {
+          if (Number.isNaN(point.value)) continue;
+          const ms = point.time.getTime();
+          if (ms < eventMs) {
+            if (!before || ms > before.time.getTime()) before = point;
+          } else if (ms > eventMs) {
+            if (!after || ms < after.time.getTime()) after = point;
+          }
+        }
+
+        let value: number | null = null;
+        if (event.type === 'open') {
+          if (after) value = after.value;
+          else if (before) value = before.value;
+        } else {
+          if (before) value = before.value;
+          else if (after) value = after.value;
+        }
+        if (value === null) continue;
+
+        const anchor = { time: event.time, value, isForecast: event.isForecast };
+
+        let insertIdx = target.length;
+        for (let i = 0; i < target.length; i++) {
+          if (target[i].time.getTime() >= eventMs) {
+            insertIdx = i;
+            break;
+          }
+        }
+        target.splice(insertIdx, 0, anchor);
+        dotPositions.push(anchor);
+
+        if (event.type === 'close') {
+          target.splice(insertIdx + 1, 0, {
+            time: new Date(eventMs + 1),
+            value: NaN,
+            isForecast: event.isForecast,
+          });
+        }
       }
 
       // Draw historical line (solid)
@@ -317,6 +391,17 @@ export function OccupancyChart({
           .attr('stroke-dasharray', '6,4')
           .attr('d', line);
       }
+
+      // Dots last, so they sit on top of the line ink.
+      for (const dot of dotPositions) {
+        g.append('circle')
+          .attr('cx', xScale(dot.time))
+          .attr('cy', yScale(dot.value))
+          .attr('r', 3.5)
+          .attr('fill', color)
+          .attr('stroke', 'white')
+          .attr('stroke-width', 1);
+      }
     });
 
     // Y axis label
@@ -329,7 +414,7 @@ export function OccupancyChart({
       .style('fill', '#000')
       .text('Auslastung');
 
-  }, [buckets, facilities, colorMap, visibility, width, height, margin]);
+  }, [buckets, facilities, colorMap, visibility, openingEvents, width, height, margin]);
 
   return (
     <ChartContainer>

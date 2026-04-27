@@ -32,3 +32,11 @@ export interface BucketData {
 }
 
 export type TimeRange = 'week' | '2days';
+
+// Open/close transition for one facility, derived from is_open flips in the
+// raw CSV. See Specs/changes/chart-opening-hours-markers/domain.md.
+export interface OpeningEvent {
+  time: Date;
+  type: 'open' | 'close';
+  isForecast: boolean;
+}

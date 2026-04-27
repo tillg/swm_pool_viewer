@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import styled from 'styled-components';
-import { RawDataPoint, BucketData, TimeRange } from './types';
+import { RawDataPoint, BucketData, TimeRange, OpeningEvent } from './types';
 import { fetchOccupancyData } from './utils/dataFetcher';
 import { aggregateData } from './utils/dataAggregator';
 import { createColorMap } from './utils/colors';
@@ -204,9 +204,15 @@ function App() {
   }, []);
 
   // Aggregate data based on time range
-  const { buckets, facilities, facilityTypes, lastDataTimestamp } = rawData
+  const { buckets, facilities, facilityTypes, lastDataTimestamp, openingEvents } = rawData
     ? aggregateData(rawData, timeRange)
-    : { buckets: [] as BucketData[], facilities: [] as string[], facilityTypes: new Map<string, string>(), lastDataTimestamp: null as Date | null };
+    : {
+        buckets: [] as BucketData[],
+        facilities: [] as string[],
+        facilityTypes: new Map<string, string>(),
+        lastDataTimestamp: null as Date | null,
+        openingEvents: new Map<string, OpeningEvent[]>(),
+      };
 
   // Initialize visibility when facilities change, merging with saved state
   useEffect(() => {
@@ -325,6 +331,7 @@ function App() {
                 facilities={facilities}
                 colorMap={colorMap}
                 visibility={visibility}
+                openingEvents={openingEvents}
                 width={CHART_WIDTH}
                 height={CHART_HEIGHT}
                 margin={CHART_MARGIN}
